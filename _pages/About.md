@@ -1,3 +1,17 @@
-# About Me
+---
+type: pages
 
-I am a data scientist.
+layout: single
+sidebar:
+
+header:
+  image: /heartbeat.jpg
+
+author_profile: true
+
+permalink: /about/
+---
+
+# About
+
+This is a data science blog
