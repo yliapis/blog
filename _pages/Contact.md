@@ -9,7 +9,7 @@ layout: single
 sidebar:
 
 header:
-  image: /asset/media/heartbeat.jpg
+  image: /assets/media/heartbeat.jpg
 
 author_profile: true
 ---
@@ -18,4 +18,4 @@ The best way to contact me is via email:
 
 yliapis`sum(range(11))-1`@gmail.com
 
-*The puzzle is there to avoid spam. Hint: Use python.*
+*The puzzle is there to avoid spam. Use python.*
