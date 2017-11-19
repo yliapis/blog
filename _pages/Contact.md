@@ -9,7 +9,7 @@ layout: single
 sidebar:
 
 header:
-  image: /heartbeat.jpg
+  image: /asset/media/heartbeat.jpg
 
 author_profile: true
 ---
