@@ -1,4 +1,8 @@
 ---
+permalink: /about/
+
+title: About
+
 type: pages
 
 layout: single
@@ -8,10 +12,6 @@ header:
   image: /heartbeat.jpg
 
 author_profile: true
-
-permalink: /about/
 ---
-
-# About
 
 This is a data science blog
