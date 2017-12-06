@@ -16,6 +16,4 @@ author_profile: true
 
 The best way to contact me is via email:
 
-yliapis`sum(range(10))-1`@gmail.com
-
-*The puzzle is there to avoid spam. Use python.*
+yliapis652@gmail.com
