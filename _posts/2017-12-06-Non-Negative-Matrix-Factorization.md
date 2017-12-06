@@ -2,12 +2,6 @@
 title: Non Negative Matrix Factorization
 ---
 
-# TODO:
-
-* DONE: Add citations
-* check math
-* improve/edit writting
-
 # Introduction
 
 The purpose of this post is to give a simple explanation of a powerful feature extraction technique, non-negative matrix factorization.
@@ -100,7 +94,7 @@ author = {Liapis, Yannis},
 title = {Non-Negative-Matrix-Factorization},
 journal = {},
 type = {Blog},
-number = {November 18},
+number = {December 6},
 year = {2017},
 howpublished = {\url{http://yliapis.github.io}}
 ```
