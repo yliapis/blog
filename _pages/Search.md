@@ -7,5 +7,3 @@ type: pages
 
 layout: single
 ---
-
-### "NOTHING YET..."
