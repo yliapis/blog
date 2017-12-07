@@ -86,7 +86,7 @@ I hope you learned just as much reading this post as I did creating it. Question
 
 # Citation
 
-Please cite this post using the BibTex entry below.
+This post is under a Please cite this post using the BibTex entry below.
 
 ```
 @misc{
@@ -98,6 +98,8 @@ number = {December 6},
 year = {2017},
 howpublished = {\url{http://yliapis.github.io}}
 ```
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
 # References
 
