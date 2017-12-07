@@ -6,7 +6,7 @@ title: Non Negative Matrix Factorization
 
 The purpose of this post is to give a simple explanation of a powerful feature extraction technique, non-negative matrix factorization.
 
-Non-negative matrix factorization (or NMF) is a method for factorizing a matrix into two lower rank matrices with strictly non-negative elements.
+Non-negative matrix factorization (NNMF, or NMF) is a method for factorizing a matrix into two lower rank matrices with strictly non-negative elements.
 
 Given matrix $$\mathbf{X}$$, find $$\mathbf{W}$$ and $$\mathbf{V}$$ such that
 
@@ -14,7 +14,7 @@ $$ \mathbf{X}_{m \times n} \approx \mathbf{W}_{m \times d}\mathbf{V}_{d \times n
 
 # Intuition
 
-Why would we want to do this? Let's assume $$ X_{m \ times n} $$ represents a data matrix of $$ n $$ samples with $$ m $$ features. *We want to capture the underlying structure of the data.* There are many different ways to look at this algorithm.
+Why would we want to do this? Let's assume $$ X_{m \times n} $$ represents a data matrix of $$ n $$ samples with $$ m $$ features. *We want to capture the underlying structure of the data.* There are many different ways to look at this algorithm.
 
 Let's take into account the amount of elements:
 
@@ -48,7 +48,7 @@ We will use the multiplicative update rule proposed [2]. Below are the two updat
 
 $$ \mathbf{W} \leftarrow \mathbf{W} \odot \frac{\mathbf{X} \mathbf{V}^T}{\mathbf{W} \mathbf{V} \mathbf{V}^T} $$
 
-$$ \mathbf{V} \leftarrow \mathbf{V} \odot \frac{\mathbf{W}^T \mathbf{X}}{\mathbf{W} \mathbf{V} \mathbf{V}^T} $$
+$$ \mathbf{V} \leftarrow \mathbf{V} \odot \frac{\mathbf{W}^T \mathbf{X}}{\mathbf{W}^T \mathbf{W} \mathbf{V}} $$
 
 The optimization process  applies these updates in succession at each training iteration. The proof is beyond the scope of this post; a more thorough explanation is available in the source paper [2]. The gist of this rule is that under certain assumptions, the $$ L_2 $$ norm of the residuals never increases under these updates. This approach is different from the traditional use of gradient decent, which uses an additive update scaled by a learning rate, rather than a multiplicative update. Note that there are many different ways to solve this problem, and most packages use highly optimized algorithms that will generally produce better results than the plain algorithm shown above. Nonetheless, we will stick with the basic update rules shown above for our experiments.
 
