@@ -95,7 +95,7 @@ Please cite this post using the BibTex entry below.
 ```
 @misc{
 author = {Liapis, Yannis},
-title = {Non-Negative-Matrix-Factorization},
+title = {Non Negative Matrix Factorization},
 journal = {},
 type = {Blog},
 number = {December 6},
