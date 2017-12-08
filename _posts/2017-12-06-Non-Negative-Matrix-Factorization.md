@@ -22,11 +22,15 @@ $$ n_1 = |\mathbf{X}| = mn $$
 
 $$ n_2 = |\mathbf{W}| + |\mathbf{V}| = md +dn $$
 
-In the majority of practical cases, $$ n_2 \ll n_1 $$; generally, $$d \ll \min(m,n)$$ is chosen. Through some math, this implies $$ d $$ is chosen as follows.
+In the majority of practical cases, the following inequality holds:
+
+$$ n_2 \ll n_1 $$
+
+Through some math, this implies $$ d $$ is chosen as follows.
 
 $$ d \ll (1/n + 1/m)^{-1}  $$
 
- The inequality between $$ n_1 $$ and $$ n_2 $$ implies a very fundamental aspect of NMF; we are compressing the data matrix $$ \mathbf{X} $$. While we try to find an accurate representation of $$ \mathbf{X} $$ as a product of $$ \mathbf{W} $$ and $$ \mathbf{V} $$, the two factorized matrices capture information about the underlying structure of the data.
+ Generally, $$d \ll \min(m,n)$$ is chosen. The inequality between $$ n_1 $$ and $$ n_2 $$ implies a very fundamental aspect of NMF; we are compressing the data matrix $$ \mathbf{X} $$. While we try to find an accurate representation of $$ \mathbf{X} $$ as a product of $$ \mathbf{W} $$ and $$ \mathbf{V} $$, the two factorized matrices capture information about the underlying structure of the data.
 
 Given $$ m $$ instances of $$ n $$ features, $$ \mathbf{W} $$ can be interpreted as a feature matrix, whereas $$ \mathbf{V} $$ can be interpreted as the coefficients matrix. In other words, each row of $$ \mathbf{W} $$ represents an additive basis, whereas each column of $$ \mathbf{V} $$ represents the basis weighting for each sample reconstruction.
 
@@ -56,11 +60,11 @@ The optimization process  applies these updates in succession at each training i
 
 Since this is an unsupervised learning algorithm, let's try to reverse engineer an additive mixture of gaussians with fixed means, fixed variances, but *stochastic* amplitudes. Gaussian basis vectors were chosen to make visualization simpler; almost any arbitrary positive basis set could have been used. Each sample is a vector.
 
-$$ \mathbf{x}_i = \displaystyle\sum_{k=1}^{d} \nu_{i,k} \mathbf{g}_k, \quad \nu_{i,k} \sim U(0,1)$$
+$$ \mathbf{x}_{i} = \displaystyle\sum_{k=1}^{d} \nu_{i,k} \mathbf{g}_{k}, \quad \nu_{i,k} \sim U(0,1)$$
 
-$$ \mathbf{g}_{k}[l] = f( \mathbf{t}[l] | \mu_k, \sigma_k) $$
+$$ \mathbf{g}_{k} = f( \mathbf{t} | \mu_k, \sigma_k) $$
 
-$$ \mathbf{g}_k $$ represents a gaussian, where $$ f $$ is the well known probability density function of a gaussian, and $$ \mathbf{t}[l] $$ represents the input to the pdf at index $$ l $$. Let's generate $$ d = 4 $$ basis vectors with 512 samples each. Below are the basis vectors chosen.
+$$ \mathbf{g}_{k} $$ represents a gaussian, where $$ f $$ is the well known probability density function of a gaussian, and $$ \mathbf{t} $$ represents the input vector to the pdf. Let's generate $$ d = 4 $$ basis vectors with 512 samples each. Below are the basis vectors chosen.
 
 ![Image](/assets/media/Non-Negative-Matrix-Factorization/Gaussians.png)
 
