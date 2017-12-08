@@ -90,7 +90,7 @@ I hope you learned just as much reading this post as I did creating it. Question
 
 # Citation
 
-This post is under a Please cite this post using the BibTex entry below.
+Please cite this post using the BibTex entry below.
 
 ```
 @misc{
