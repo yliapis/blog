@@ -1,5 +1,9 @@
 ---
 title: Non Negative Matrix Factorization
+
+header:
+  image: /assets/media/Non-Negative-Matrix-Factorization/Gaussians_recon_header0.gif
+  teaser: /assets/media/Non-Negative-Matrix-Factorization/NMF.png
 ---
 
 # Introduction
