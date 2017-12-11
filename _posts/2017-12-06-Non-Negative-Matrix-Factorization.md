@@ -38,7 +38,7 @@ $$ d \ll (1/n + 1/m)^{-1}  $$
 
 Given $$ m $$ instances of $$ n $$ features, $$ \mathbf{W} $$ can be interpreted as a feature matrix, whereas $$ \mathbf{V} $$ can be interpreted as the coefficients matrix. In other words, each row of $$ \mathbf{W} $$ represents an additive basis, whereas each column of $$ \mathbf{V} $$ represents the basis weighting for each sample reconstruction.
 
-Due to the non-negativity constraint, the features are strictly additive. This property results in  sparse feature representations[cite], as well as one of NMF's core strengths: It automatically clusters the data. Unlike PCA which simply rotates the covariance matrix, NMF builds a sparse-basis representation of the data.
+Due to the non-negativity constraint, the features are strictly additive. This property results in  sparse feature representations [1], as well as one of NMF's core strengths: It automatically clusters the data. Unlike PCA which simply rotates the covariance matrix, NMF builds a sparse-basis representation of the data.
 
 One original application of this algorithm was to detect additive objects in images [1]. An excerpted image from the paper is shown below.
 
