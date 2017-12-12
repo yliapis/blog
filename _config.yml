@@ -251,4 +251,6 @@ defaults:
 ### YANNI
 header:
   image: /heartbeat.jpg
+
+search: true
 ### END YANNI

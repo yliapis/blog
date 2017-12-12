@@ -3,7 +3,7 @@ permalink: /search/
 
 title: "Search"
 
-type: pages
+type: search
 
 layout: single
 ---
