@@ -16,6 +16,8 @@ Given matrix $$\mathbf{X}$$, find $$\mathbf{W}$$ and $$\mathbf{V}$$ such that
 
 $$ \mathbf{X}_{m \times n} \approx \mathbf{W}_{m \times d}\mathbf{V}_{d \times n} $$
 
+Where all elements of $$ \mathbf{X} $$, $$ \mathbf{W} $$, and $$ \mathbf{V} $$ are strictly nonnegative.
+
 # Intuition
 
 Why would we want to do this? Let's assume $$ X_{m \times n} $$ represents a data matrix of $$ n $$ samples with $$ m $$ features. *We want to capture the underlying structure of the data.* There are many different ways to look at this algorithm.
@@ -62,7 +64,7 @@ The optimization process  applies these updates in succession at each training i
 
 # Experiments
 
-Since this is an unsupervised learning algorithm, let's try to reverse engineer an additive mixture of gaussians with fixed means, fixed variances, but *stochastic* amplitudes. Gaussian basis vectors were chosen to make visualization simpler; almost any arbitrary positive basis set could have been used. Each sample is a vector.
+Since this is an unsupervised learning algorithm, let's try to reverse engineer an additive mixture of gaussians with fixed means, fixed variances, but *stochastic* amplitudes. Gaussian basis vectors were chosen to make visualization simpler; almost any arbitrary nonnegative basis set could have been used. Each sample is a vector.
 
 $$ \mathbf{x}_{i} = \displaystyle\sum_{k=1}^{d} \nu_{i,k} \mathbf{g}_{k}, \quad \nu_{i,k} \sim U(0,1)$$
 
