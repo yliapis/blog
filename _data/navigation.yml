@@ -6,8 +6,6 @@ main:
    url: /
  - title: "About"
    url: /about/
- - title: "Search"
-   url: /search/
  - title: "Contact"
    url: /contact/
   # - title: "Sample Posts"
