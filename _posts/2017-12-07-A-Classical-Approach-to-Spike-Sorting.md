@@ -60,7 +60,7 @@ We will compute the transformation matrix via an eigen-decomposition of the cova
 
 First, we de-mean the data:
 
-$$ \mathbf{X}_0 = \mathbf{X} - E{[\mathbf{X}]}_{t \times 1} $$
+$$ \mathbf{X}_0 = \mathbf{X} - E{[\mathbf{X}]} $$
 
 We then go on to compute the covariance matrix:
 
@@ -68,7 +68,7 @@ $$ \mathbf{C} = \mathbf{X_0}\mathbf{X_0}^T $$
 
 Afterwards, we compute an *eigendecomposition* [6] on the covariance matrix, and sort the eigenvalue-eigenvector $$ (\mathbf{v}_i, \lambda_i) $$ pairs by descending eigenvalue:
 
-$$ Eig\{\mathbf{C}\} = \{ (\mathbf{v}_i, \lambda_i) \mid \lambda_i \geq \lambda_{i-1} \, \forall \lambda_i, \,\, i = 1 ... t  \} $$
+$$ Eig\{\mathbf{C}\} = \{ ( \lambda_i, \mathbf{v}_i) \mid \lambda_i \geq \lambda_{i-1} \, \forall \lambda_i, \,\, i = 1 ... t  \} $$
 
 This stage is key: the first principal component captures more variance in the data than the second principal component, and so on. The resulting eigenvectors, or principal components, are organized into a matrix:
 
@@ -109,19 +109,31 @@ We will now run k-means clustering [CITE] on the data projected into the feature
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered2.png)
 
-The clustering results corroborate our previous observations: only the first principal component looks like it is capturing valuable information in this  dataset. The vertical boundary between the two clusters further implies that only the first component appears to be valuable for our analysis. Let's get at intuition of what each cluster looks like by projecting each cluster's mean back into the original space. We now define the clustered mean $$ \mathbf{m}_i $$, derived from each underlying cluster mean $$ \mathbf{c}_i $$.
+The clustering results corroborate our previous observations: only the first principal component looks like it is capturing valuable information in this  dataset. The vertical boundary between the two clusters further implies that only the first component appears to be valuable for our analysis. Let's get at intuition of what each cluster looks like by analyzing statistics of each cluster's  corresponding data points. Given each data sample is represent as $$ \mathbf{x}_{j} = \mathbf{X}_{:,j} $$, and each cluster is denoted as $$ C_i $$, we now define $$ D_i $$:
 
-Given the relationship we already know between $$ \mathbf{c}_i $$ and $$ \mathbf{m}_i $$:
+$$ D_i = \{ \mathbf{x}_{j} \mid
+\mathbf{x}_j \in C_i, \,\, j=1...n
+\}, \,\,\,\, i=1...k $$
 
-$$ \mathbf{c}_i = \mathbf{U} \mathbf{m}_i $$
+We can now visualize each set of data samples $$ D_i $$ to reveal insights about our data. A plot of clustered means with 95% confidence intervals is plotted below.
 
-Through some linear algebra, we derive the following formula:
+![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered_means_true3.png)
 
-$$ \mathbf{m}_i = (\mathbf{U}^T \mathbf{U})^{-1}\mathbf{U}^T \mathbf{c}_i $$
+We have now captured (presumably) 2 different neurons. The full dataset mean is also plotted as a sanity check. The first cluster mean captured strongly resembles an action potential, and also strongly corresponds with the full dataset mean. The second cluster is a bit trickier;
 
-We can also project variances as well as means (say, $$ \mathbf{s}_i $$ rather than $$ \mathbf{c}_i $$) through the last formula above: below are each of the spikes estimated with 95% confidence intervals:
+We have just gone through one of the most basic forms of spike sorting. In order to get better results, many different tweaks could be applied. Some potential additional steps include:
 
-![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered_means1.png)
+
+* More sophisticated pre-threshold filtering
+* More sophisticated thresholding
+* Rejecting noisy windowed samples
+* Rejecting non-spike windowed samples
+* More advanced feature extraction
+* More intelligent clustering
+* Using all channels of the microelectrode array
+* Incorporating the electrode geometry and physics into the algorithm
+
+Since the data we used was already in windowed form, it is possible that some of these fine tuning steps up to the windowing stage have already been implemented. This topic is still highly researched, and is a key component in brain-machine interface research [CITE]. Many neuroprosthetics, such as [CITE], [CITE], and [CITE] operate on extracellular recordings. This is still a very active area of research, and it is likely to further accelerate once commercial neural implants become a reality.
 
 # Note from the Author
 
@@ -137,7 +149,7 @@ author = {Liapis, Yannis},
 title = {A Classical Approach to Spike Sorting},
 journal = {},
 type = {Blog},
-number = {December 7},
+number = {December 27},
 year = {2017},
 howpublished = {\url{http://yliapis.github.io}}
 ```
