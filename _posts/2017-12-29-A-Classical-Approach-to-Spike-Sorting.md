@@ -62,7 +62,7 @@ Afterwards, we compute an *eigendecomposition* [6] on the covariance matrix, and
 
 $$ Eig\{\mathbf{C}\} = \{ ( \lambda_i, \mathbf{v}_i) \mid \lambda_i \geq \lambda_{i-1} \, \forall \lambda_i, \,\, i = 1 ... t  \} $$
 
-This stage is key: the first principal component captures more variance in the data than the second principal component, and so on. The resulting eigenvectors, or principal components, are organized into a matrix:
+There is meaning behind each eignenvalue-eigenvector pair: The eigenvector represents the principal component, whereas the eigenvalue represents how much variance is captured by the corresponding principal component. Given the sort by descending eigenvalue, first principal component captures more variance in the data than the second principal component, and so on. The resulting eigenvectors, or principal components, are organized into a matrix:
 
 $$ \mathbf{U} = \begin{pmatrix}
   & \mathbf{v}_1 & \\
