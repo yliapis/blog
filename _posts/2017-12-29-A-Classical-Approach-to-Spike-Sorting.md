@@ -6,13 +6,6 @@ header:
   teaser: /assets/media/A-Classical-Approach-to-Spike-Sorting/spike_sorting_diagram2.png
 ---
 
-# TODO:
-
-* Iron out References
-* include citations where they are needed
-* properly cite spike sorting diagram
-* etc
-
 # Introduction
 
 In the field of Neuroscience, one often wants to capture individual neuron activity. This is often done via a microelectrode (or set of microelectrodes) inserted into the brain and recording the time series of voltage readings. Often a times, these readings are extracellular recordings taken within a neighborhood of neurons. The task of taking this time series and extracting the action potential signatures from individual neurons is called spike sorting [1].
@@ -108,13 +101,7 @@ We will now run k-means clustering [7] [15] on the data projected into the featu
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered2.png)
 
-The clustering results corroborate our previous observations: only the first principal component looks like it is capturing valuable information in this  dataset. The vertical boundary between the two clusters further implies that only the first component appears to be valuable for our analysis. Let's get at intuition of what each cluster looks like by analyzing statistics of each cluster's  corresponding data points. Given each data sample is represent as $$ \mathbf{x}_{j} = \mathbf{X}_{:,j} $$, and each cluster is denoted as $$ C_i $$, we now define $$ D_i $$:
-
-$$ D_i = \{ \mathbf{x}_{j} \mid
-\mathbf{x}_j \in C_i, \,\, j=1...n
-\}, \,\,\,\, i=1...k $$
-
-We can now visualize each set of data samples $$ D_i $$ to reveal insights about our data. A plot of clustered means with 95% confidence intervals is plotted below.
+The clustering results corroborate our previous observations: only the first principal component looks like it is capturing valuable information in this  dataset. The vertical boundary between the two clusters further implies that only the first component appears to be valuable for our analysis. Let's get at intuition of what each cluster looks like by analyzing statistics of each cluster's  corresponding data points. For each cluster, there are a set of corresponding windowed action potentials. A plot of clustered means with 95% confidence intervals, in addition to the full dataset mean, are plotted below.
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered_means_true3.png)
 
