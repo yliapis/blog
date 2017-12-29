@@ -11,7 +11,6 @@ header:
 * Iron out References
 * include citations where they are needed
 * properly cite spike sorting diagram
-* properly explain E[] (expected value) operator in proper section
 * etc
 
 # Introduction
@@ -26,7 +25,7 @@ Initially, we have a raw time series of extracellular voltage recordings. This i
 
 A lot of the signal filtering, thresholding, and windowing is generally done using *a priori* knowledge of the experiment, method of data acquisition, underlying physiology, and general neuroscience knowledge. Sometimes, this may mean a scientist will analyze the neural signal traces visually and manually tune a threshold to detect spikes.
 
-For the sake of brevity, we will focus on the final stage of spike sorting; given the windowed action potentials detected, we want to determine the underlying neurons. One original approach [CITE] is to use principal component analysis (PCA) in conjunction with K-Means.
+For the sake of brevity, we will focus on the final stage of spike sorting; given the windowed action potentials detected, we want to determine the underlying neurons. One original approach [2] is to use principal component analysis (PCA) in conjunction with K-Means.
 
 # Dataset
 
@@ -48,9 +47,9 @@ The entire ($$ n \approx 90,000 $$) dataset in addition to the mean are also plo
 
 # Spike Sorting
 
-The first step for our spike sorting algorithm will be feature extraction; we will be using principal component analysis to do this. For those unfamiliar with the algorithm, it is recommended to read the [Wikipedia page](https://en.wikipedia.org/wiki/Principal_component_analysis) in addition to the following references: [CITE] [CITE].
+The first step for our spike sorting algorithm will be feature extraction; we will be using principal component analysis to do this. For those unfamiliar with the algorithm, it is recommended to read the [Wikipedia page](https://en.wikipedia.org/wiki/Principal_component_analysis) [8] in addition to the relevant references included [9] [10].
 
-The way we will be using it will be treating each windowed action potential as a feature vector in order to compute the principal components. This is an effective approach, since there are distinct covariances for each neural signature. We will be using the eigen-decomposition technique [CITE].
+The way we will be using it will be treating each windowed action potential as a feature vector in order to compute the principal components. This is an effective approach, since there are distinct covariances for each neural signature. We will be using the eigen-decomposition technique [10].
 
 Given a data matrix $$ \mathbf{X}_{t \times n} $$, where t is the time index of the sample, and n is the index of each windowed action potential, we want to project into a feature space with $$ m $$ features per sample; we want to compute the data matrix $$ \mathbf{F}_{m \times n} $$. Since PCA computes principal components that the original data is projected onto, we can represent PCA as a linear operator $$ \mathbf{U} $$, where each row represents a principal component.
 
@@ -105,7 +104,7 @@ Let's say we want to capture at least 75% of the variance. We choose $$ m $$ pri
 
 It is clear that the first principal component looks a lot like an action potential. The latter few principal components look less and less like action potentials as their corresponding variance decreases; they are less important. From looking at the scatter plots of the data in the feature space, it is clear that the most predominant clusters arise along the first principal component. However, as we go on to components 2, 3, and 4, it seems like we are capturing more noise than valuable information.
 
-We will now run k-means clustering [CITE] on the data projected into the feature space, or, mor formally, the feature matrix $$ \mathbf{F} $$. It looks like there are 2 clusters from our previous plots, so we will choose $$ k=2 $$ for k-means.
+We will now run k-means clustering [7] [15] on the data projected into the feature space, or, mor formally, the feature matrix $$ \mathbf{F} $$. It looks like there are 2 clusters from our previous plots, so we will choose $$ k=2 $$ for k-means.
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered2.png)
 
@@ -119,10 +118,11 @@ We can now visualize each set of data samples $$ D_i $$ to reveal insights about
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered_means_true3.png)
 
-We have now captured (presumably) 2 different neurons. The full dataset mean is also plotted as a sanity check. The first cluster mean captured strongly resembles an action potential, and also strongly corresponds with the full dataset mean. The second cluster is a bit trickier;
+We have now captured (presumably) 2 different neurons. The full dataset mean is also plotted as a sanity check. The first cluster mean captured strongly resembles an action potential, and also strongly corresponds with the full dataset mean. The second cluster does hint at some background neuronal activity, as the initial downwards turn of the curve happens earlier than the first cluster mean. Interestingly enough, the second cluster does not have a pronounced upward spike like the first cluster.
+
+A fundamental question arises here: are we really capturing two neurons, or is the second cluster simply noise or an artifact of our clustering technique? This is a very difficult question to answer, and is often tackled by testing various spike sorting techniques on the data, and using *a priori* knowledge of the experimental design [2].
 
 We have just gone through one of the most basic forms of spike sorting. In order to get better results, many different tweaks could be applied. Some potential additional steps include:
-
 
 * More sophisticated pre-threshold filtering
 * More sophisticated thresholding
@@ -132,8 +132,9 @@ We have just gone through one of the most basic forms of spike sorting. In order
 * More intelligent clustering
 * Using all channels of the microelectrode array
 * Incorporating the electrode geometry and physics into the algorithm
+* Many, many more undiscovered improvements
 
-Since the data we used was already in windowed form, it is possible that some of these fine tuning steps up to the windowing stage have already been implemented. This topic is still highly researched, and is a key component in brain-machine interface research [CITE]. Many neuroprosthetics, such as [CITE], [CITE], and [CITE] operate on extracellular recordings. This is still a very active area of research, and it is likely to further accelerate once commercial neural implants become a reality.
+Since the data we used was already in windowed form, it is possible that some of these fine tuning steps up to the windowing stage have already been implemented. Spike detection and classification is a key component in brain-machine interfaces [12] [13]; Many neuroprosthetics [13] [14] operate on extracellular recordings. This is still a very active area of research, and it is likely to further accelerate once commercial neural implants become more widespread.
 
 # Note from the Author
 
@@ -149,7 +150,7 @@ author = {Liapis, Yannis},
 title = {A Classical Approach to Spike Sorting},
 journal = {},
 type = {Blog},
-number = {December 27},
+number = {December 9},
 year = {2017},
 howpublished = {\url{http://yliapis.github.io}}
 ```
@@ -158,9 +159,9 @@ howpublished = {\url{http://yliapis.github.io}}
 
 # References
 
-[[1](http://icslwebs.ee.ucla.edu/dejan/researchwiki/index.php/Neural_Spike_Sorting)] Wiki Page, "Neural Spike Sorting"
+[[1](http://icslwebs.ee.ucla.edu/dejan/researchwiki/index.php/Neural_Spike_Sorting)] "Neural Spike Sorting", PDA Group Wiki (UCLA)
 
-[[2](http://www.scholarpedia.org/article/Spike_sorting)] Quiroga, R. Q., "Spike Sorting"
+[[2](http://www.scholarpedia.org/article/Spike_sorting)] Quiroga, R. Q., "Spike Sorting", Scholarpedia 2.12 (2007): 3583. Web. 14 Feb. 2016
 
 [[3](https://www.nature.com/articles/nature14178)] N. Li *et al*, "A motor cortex circuit for motor planning and movement", Nature 519, 51–56 (05 March 2015), doi: 10.1038/nature14178
 
@@ -171,4 +172,21 @@ howpublished = {\url{http://yliapis.github.io}}
 
 [[6](https://en.wikipedia.org/wiki/Eigendecomposition_of_a_matrix)] "Eigendecomposition of a matrix", Wikipedia
 
-[[7]()]
+[[7](http://www.jstor.org/stable/2346830)] J. A. Hartigan *et al*, "Algorithm AS 136: A K-Means Clustering Algorithm". Journal of the Royal Statistical Society, Series C 28 (1979)
+
+[[8](https://en.wikipedia.org/wiki/Principal_component_analysis)] "Principal component analysis", Wikipedia
+
+[[9](http://www.sciencedirect.com/science/article/pii/0169743987800849)] S. Wold *et al*, "Principal component analysis", Chemometrics and Intelligent Laboratory Systems, Vol 2 Iss 1-3, Aug 1987, pp 37-52
+
+[[10](http://onlinelibrary.wiley.com/doi/10.1002/wics.101/full)] H. Abdi, L. J. Williams, "Principal component analysis", WIREs Computational Statistics
+
+[[11](http://neurobot.bio.auth.gr/2005/a-review-of-methods-for-spike-sorting/)] M. S. Lewicki. “A review of methods for spike sorting: the detection and classification of neural action potentials,” Comput. Neural Syst. 9, R53- R78, (1998)
+
+[[12](http://ieeexplore.ieee.org/abstract/document/1214707/)] D. R. Kipke *et al*, "Silicon-substrate intracortical microelectrode arrays for long-term recording of neuronal spike activity in cerebral cortex", IEEE Transactions on Neural Systems and Rehabilitation Engineering, Vol 11, Iss 2, June 2003
+
+[[13](http://stm.sciencemag.org/content/5/210/210rv2.short)] D. Borton *et al* "Personalized Neuroprosthetics", Science Translational Medicine  06 Nov 2013: Vol. 5, Issue 210, pp. 210rv2, DOI: 10.1126/scitranslmed.3005968
+
+[[14](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3497935/)] J. J. Shih *et al*, "Brain-Computer Interfaces in Medicine", Mayo Clin Proc. 2012 Mar; 87(3): 268–279,
+doi:  10.1016/j.mayocp.2011.12.008
+
+[[15](https://en.wikipedia.org/wiki/K-means_clustering)] "k-means clustering", Wikipedia
