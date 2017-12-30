@@ -14,4 +14,6 @@ header:
 author_profile: true
 ---
 
-This is a data science blog
+Hi all, Yanni here. I started this blog in order to share my knowledge and experiences learning about computational and data sciences. If you have any questions or comments, please feel free to [contact me](/Contact).
+
+- Yanni
