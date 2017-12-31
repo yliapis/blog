@@ -80,13 +80,13 @@ A total of ~16k samples were generated. A few $$ \mathbf{x}_i $$ samples generat
 
 We run the algorithm for 256 steps and log the loss and learned basis vectors during training. The two graphs below show the static $$ \mathbf{g}_k $$ vectors and the evolving $$ \mathbf{W}_{:,k} $$ vectors on the left, and the loss curves on the right.
 
-![Image](/assets/media/Non-Negative-Matrix-Factorization/Loss_anim3.gif)
+![Image](/assets/media/Non-Negative-Matrix-Factorization/Loss_anim7.gif)
 
 Over time, $$ \mathbf{W} $$ evolves from white noise to smooth curves closely matching the $$ \mathbf{g}_k $$ vectors. From more careful observation of the animation, a few observations are apparent. The first few iterations remove a lot of noise present. As the majority of the noise is removed, the approximated basis vectors begin to shift to resemble the initial basis vectors. This is where the clustering property of NMF becomes clearer; each vector is an underlying source of variation in the data. Towards the later iterations, the remaining amount of noise and mismatch between the curves is slowly taken away.
 
 Below we can see some examples of samples and their reconstructions changing over time.
 
-![Image](/assets/media/Non-Negative-Matrix-Factorization/Gaussians_recon2.gif)
+![Image](/assets/media/Non-Negative-Matrix-Factorization/Gaussians_recon5.gif)
 
 This is just a toy example of one way the algorithm can be used. Common applications include genomics/bioinformatics [4], text mining [5], image processing [2], and time series (often blind source separation) [6] [7].
 
