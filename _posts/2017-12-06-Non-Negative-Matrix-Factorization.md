@@ -78,7 +78,7 @@ A total of ~16k samples were generated. A few $$ \mathbf{x}_i $$ samples generat
 
 ![Image](/assets/media/Non-Negative-Matrix-Factorization/Gaussians2.png)
 
-We run the algorithm for 256 steps and log the loss and learned basis vectors during training. The two graphs below show the static $$ \mathbf{g}_k $$ vectors and the evolving $$ \mathbf{W}_{:,k} $$ vectors on the left, and the loss curves on the right.
+We run the algorithm for 256 steps and log the loss and learned basis vectors during training. The two graphs below show the static $$ \mathbf{g}_k $$ vectors and the evolving $$ \mathbf{W}_{:,k} $$ vectors on the left, and the loss (Mean Squared Error) curves on the right. 
 
 ![Image](/assets/media/Non-Negative-Matrix-Factorization/Loss_anim7.gif)
 
