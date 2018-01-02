@@ -137,7 +137,7 @@ author = {Liapis, Yannis},
 title = {A Classical Approach to Spike Sorting},
 journal = {},
 type = {Blog},
-number = {December 9},
+number = {December 29},
 year = {2017},
 howpublished = {\url{http://yliapis.github.io}}
 ```
