@@ -97,7 +97,7 @@ Let's say we want to capture at least 75% of the variance. We choose $$ m $$ pri
 
 It is clear that the first principal component looks a lot like an action potential. The latter few principal components look less and less like action potentials as their corresponding variance decreases; they are less important. From looking at the scatter plots of the data in the feature space, it is clear that the most predominant clusters arise along the first principal component. However, as we go on to components 2, 3, and 4, it seems like we are capturing more noise than valuable information.
 
-We will now run k-means clustering [7] [15] on the data projected into the feature space, or, mor formally, the feature matrix $$ \mathbf{F} $$. It looks like there are 2 clusters from our previous plots, so we will choose $$ k=2 $$ for k-means.
+We will now run k-means clustering [7] [15] on the data projected into the feature space, or, more formally, the feature matrix $$ \mathbf{F} $$. It looks like there are 2 clusters from our previous plots, so we will choose $$ k=2 $$ for k-means.
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/clustered2.png)
 
