@@ -2,7 +2,7 @@
 title: A Classical Approach to Spike Sorting
 
 header:
-  image: /assets/media/A-Classical-Approach-to-Spike-Sorting/vtraces0.gif
+  #image: /assets/media/A-Classical-Approach-to-Spike-Sorting/vtraces0.gif
   teaser: /assets/media/A-Classical-Approach-to-Spike-Sorting/spike_sorting_diagram2.png
 ---
 
