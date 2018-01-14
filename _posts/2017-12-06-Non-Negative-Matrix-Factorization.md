@@ -46,7 +46,7 @@ One original application of this algorithm was to detect additive objects in ima
 
 ![Image](/assets/media/Non-Negative-Matrix-Factorization/Faces.png)
 
-It is immediately apparent that the rightmost matrix of images is capturing facial features. Common patterns such as eyebrows, eye shadows, lips, and facial outlines are being detected and stored by the algorithm with no context other than a set of facial images. These facial features form the sparse additive basis with which faces can be reconstructed.
+It is immediately apparent that the leftmost matrix of images is capturing facial features. Common patterns such as eyebrows, eye shadows, lips, and facial outlines are being detected and stored by the algorithm with no context other than a set of facial images. These facial features form the sparse additive basis with which faces can be reconstructed.
 
 # Algorithm
 
