@@ -60,7 +60,9 @@ $$ \mathbf{W} \leftarrow \mathbf{W} \odot \frac{\mathbf{X} \mathbf{V}^T}{\mathbf
 
 $$ \mathbf{V} \leftarrow \mathbf{V} \odot \frac{\mathbf{W}^T \mathbf{X}}{\mathbf{W}^T \mathbf{W} \mathbf{V}} $$
 
-The optimization process  applies these updates in succession at each training iteration. The proof is beyond the scope of this post; a more thorough explanation is available in the source paper [2]. The gist of this rule is that under certain assumptions, the $$ L_2 $$ norm of the residuals never increases under these updates. This approach is different from the traditional use of gradient decent, which uses an additive update scaled by a learning rate, rather than a multiplicative update. Note that there are many different ways to solve this problem, and most packages use highly optimized algorithms that will generally produce better results than the plain algorithm shown above. Nonetheless, we will stick with the basic update rules shown above for our experiments.
+The optimization process  applies these updates in succession at each training iteration. The proof is beyond the scope of this post; a more thorough explanation is available in the source paper [2]. The gist of this rule is that under certain assumptions, the $$ L_2 $$ norm of the residuals never increases under these updates. This approach is different from the traditional use of gradient decent, which uses an additive update scaled by a learning rate, rather than a multiplicative update.
+
+Note that there are many different ways to solve this problem, and most packages use highly optimized algorithms that will generally produce better results than the plain algorithm shown above. Nonetheless, we will stick with the basic update rules shown above for our experiments. For a more rigorous review of various algorithms, the reader is directed to N. Gillis's papers [8] [9].
 
 # Experiments
 
@@ -126,3 +128,7 @@ howpublished = {\url{http://yliapis.github.io}}
 [[6](http://www2.imm.dtu.dk/pubdb/views/edoc_download.php/4511/pdf/imm4511.pdf)] Schmidt, M. N. & Olsson, R. K.,"Single-Channel Speech Separation using Sparse Non-Negative Matrix Factorization"
 
 [[7](http://ieeexplore.ieee.org/abstract/document/1661352/)] Cichocki, A., "New Algorithms for Non-Negative Matrix Factorization in Applications to Blind Source Separation"
+
+[[8](https://arxiv.org/pdf/1401.5226.pdf)] N. Gillis, "The Why and How of Nonnegative Matrix Factorization"
+
+[[9](https://arxiv.org/pdf/1703.00663.pdf)] N. Gillis, "Introduction to Nonnegative Matrix Factorization"
