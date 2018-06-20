@@ -14,6 +14,6 @@ header:
 author_profile: true
 ---
 
-I started this blog in order to share my knowledge and experiences learning about computational and data sciences. If you have any questions or comments, please feel free to [contact me](/Contact).
+I started this blog in order to share my knowledge and experiences learning about computational and data sciences. If you have any questions or comments, please feel free to [contact me](/contact).
 
 - Yanni
