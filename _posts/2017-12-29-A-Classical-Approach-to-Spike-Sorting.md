@@ -8,7 +8,7 @@ header:
 
 # Introduction
 
-In the field of Neuroscience, one often wants to capture individual neuron activity. This is often done via a microelectrode (or set of microelectrodes) inserted into the brain and recording the time series of voltage readings. Often a times, these readings are extracellular recordings taken within a neighborhood of neurons. The task of taking this time series and extracting the action potential signatures from individual neurons is called spike sorting [1].
+In the field of Neuroscience, one often wants to capture individual neuron activity. This is often done via a microelectrode (or set of microelectrodes) inserted into the brain and recording the time series of voltage readings. Often a times, these readings are extracellular recordings taken within a neighborhood of neurons. The task of taking this time series and extracting the action potential signatures from individual neurons is called spike sorting. A modified diagram from the UCLA PDA Wiki page [1] illustrating the process is shown below.
 
 ![Image](/assets/media/A-Classical-Approach-to-Spike-Sorting/spike_sorting_diagram2.png)
 
