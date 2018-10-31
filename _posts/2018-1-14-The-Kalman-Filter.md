@@ -167,15 +167,11 @@ Given this model, we can derive the predict and update steps. The predict step i
 
 <table>
   <tr>
-    <td> </td>
-    <td> </td>
-  </tr>
-  <tr>
     <td> $$ \mathbf{\hat{x}}_{k \mid k-1} = \mathbf{F}_k\mathbf{\hat{x}}_{k-1 \mid k-1} + \mathbf{B}_k\mathbf{u}_k $$ </td>
     <td> Predicted state estimate </td>
   </tr>
   <tr>
-    <td> $$ \mathbf{P}_{k \mid k-1} = \mathbf{F}_k\mathbf{P}_{k-1 \mid k-1}\mathbf{F}_k^T + \mathbf{Q}_k $$ </td>
+    <td> $$ \mathbf{P}_{k \mid k-1} = \mathbf{F}_k\mathbf{P}_{k-1 \mid k-1}\mathbf{F}_k^\mathrm{T} + \mathbf{Q}_k $$ </td>
     <td> Predicted estimate covariance </td>
   </tr>
 </table>
@@ -184,26 +180,26 @@ Given this model, we can derive the predict and update steps. The predict step i
 
 <table>
   <tr>
-    <td> </td>
-    <td> </td>
+    <td> $$ \tilde{\mathbf{y}}_k = \mathbf{z}_k - \mathbf{H}_k\hat{\mathbf{x}}_{k\mid k-1} $$ </td>
+    <td> pre-fit residual </td>
   </tr>
   <tr>
-    <td> $$ \mathbf{\hat{x}}_{k \mid k-1} = \mathbf{F}_k\mathbf{\hat{x}}_{k-1 \mid k-1} + \mathbf{B}_k\mathbf{u}_k $$ </td>
-    <td> Predicted state estimate </td>
+    <td> $$ \mathbf{S}_k = \mathbf{R}_k + \mathbf{H}_k \mathbf{P}_{k\mid k-1} \mathbf{H}_k^\mathrm{T} $$ </td>
+    <td> pre-fit residual covariance </td>
   </tr>
   <tr>
-    <td> $$ \mathbf{P}_{k \mid k-1} = \mathbf{F}_k\mathbf{P}_{k-1 \mid k-1}\mathbf{F}_k^T + \mathbf{Q}_k $$ </td>
-    <td> Predicted estimate covariance </td>
+    <td> $$ \mathbf{K}_k = \mathbf{P}_{k\mid k-1}\mathbf{H}_k^\mathrm{T} \mathbf{S}_k^{-1} $$ </td>
+    <td> Optimal Kalman gain </td>
+  </tr>
+  <tr>
+    <td> $$ \hat{\mathbf{x}}_{k\mid k} = \hat{\mathbf{x}}_{k\mid k-1} + \mathbf{K}_k\tilde{\mathbf{y}}_k $$ </td>
+    <td> Updated state estimate </td>
+  </tr>
+  <tr>
+    <td> $$ \mathbf{P}_{k|k} = (\mathbf{I} - \mathbf{K}_k \mathbf{H}_k )\mathbf{P}_{k|k-1}(\mathbf{I} - \mathbf{K}_k \mathbf{H}_k )^{\mathrm{T}}+\mathbf{K}_k\mathbf{R}_k\mathbf{K}^{\mathrm{T}}_k $$ </td>
+    <td> Updated estimate covariance </td>
   </tr>
 </table>
-
-| nothing | here |
-| -------------  | ------------- |
-| \mathbf{\hat{x}}_{k \mid k-1} = \mathbf{F}_k \mathbf{\hat{x}}_{k-1 \mid k-1} + \mathbf{B}_k \mathbf{u}_k  | *a priori* state estimate |
-
-<h3 style="text-align: center;" markdown="1">Update</h3>
-
-
 
 The full derivation is beyond the scope of this post, although those interested in learning more are recommended Faragher's introductory paper [1], [], and.
 
