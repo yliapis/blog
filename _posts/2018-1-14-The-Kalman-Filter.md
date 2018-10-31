@@ -205,7 +205,7 @@ The full derivation is beyond the scope of this post, although those interested 
 
 # Experiments
 
-To illustrate the concept of the Kalman Filter, we will construct a toy example: Given a particle's position over time, we will try to estimate its velocity. For simplicity, we will deal with the 1-D case for now.
+To illustrate the concept of the Kalman Filter, we will construct a toy example: Given a particle's position over time, we will try to estimate its velocity. For simplicity, we will deal with the 1-D case.
 
 ### Notation
 
@@ -234,15 +234,53 @@ $$ \mathbf{F} = \begin{pmatrix}
   0 & 1 \\
  \end{pmatrix} $$ (state transition)
 
-Now that we have formulated our problem, let's generate some synthetic data.
+Now that we have formulated our problem, we generate some synthetic measurement data.
 
-![Image](/assets/media/The-Kalman-Filter/position_graph1.png)
+$$ \mathbf{z}_k = \mathbf{f}(k\Delta{t}) + \mathbf{\nu_k}, \quad \mathbf{\nu}_k \sim \mathcal{N}(\mathbf{0}, \mathbf{R}) $$
 
-Given this data, we can compute the velocity as $$ \Delta{x}/\Delta{t}$$
+We have chosen our true position to be modeled by the sigmoid[ref] function ( $ \mathbf{f}() $ ) over time.
 
-![Image](/assets/media/The-Kalman-Filter/velocity_graph1.png)
+![Image](/assets/media/The-Kalman-Filter/position_graph2.png)
 
-The graph above illustrates why we use a Kalman filter. The velocity calculation is severely corrupted by the noise.
+)
+
+Given this data, we can compute the velocity as $$ \Delta{x}/\Delta{t}$$. However, the corrupting noise causes some very serious issues that completely destroy our estimate. The corrupting influence of the noise multiplies when trying to estimate velocity in the graph below.
+
+![Image](/assets/media/The-Kalman-Filter/velocity_graph2.png)
+
+This is why we use a Kalman filter. The model calculation is severely corrupted by the noise.
+
+In order to implement our Kalman filter, we need to estimate two quantities *a priori*: the observation covariance $\mathbf{R}$ and the state transition covariance $\mathbf{Q}$.
+
+Given we generated the noise, the observation covariance is already known.
+
+$$ \mathbf
+
+ While it may seem like there is no state transition covariance in this model, this couldn't be further from the truth; there is a *hidden* control input, acceleration.
+
+$$ \mathbf{x}_k = \mathbf{F}\mathbf{x}_{k-1} + \mathbf{G}a_k $$
+
+Where $ \mathbf{G} $ is the effect of acceleration on our state. Written explicitly,
+
+$$ \begin{pmatrix}
+  x_k \\
+  v_k \\
+ \end{pmatrix} =
+ \begin{pmatrix}
+   1 & \Delta{t} \\
+   0 & 1\\
+  \end{pmatrix}\begin{pmatrix}
+    x_{k-1} \\
+    v_{k-1} \\
+   \end{pmatrix} +
+   \begin{pmatrix}
+     \frac{\Delta{t}^2}{2} \\
+     \Delta{t} \\
+    \end{pmatrix}a_k $$
+
+Thus, $ \mathbf{Q} $ can be estimated as
+
+$$ \mathbf{Q} = \mathbf{G}\mathbf{G}^\mathrm{T}\sigma_a^2 $$
 
 # Note from the Author
 
