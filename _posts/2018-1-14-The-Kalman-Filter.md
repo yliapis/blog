@@ -18,7 +18,7 @@ The Kalman Filter makes an *educated guess* about the *state* of a [dynamical sy
 
 To begin, let's introduce the concept the Kalman Filter is based upon: Recursive Bayesian estimation, or the [Bayes filter](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation). Simply put, the goal is to estimate an unknown probability density function recursively over time using incomplete or noisy measurements [4].
 
-we can represent our dynamical system as a hidden markov model (HMM).
+We can represent our dynamical system as a hidden markov model (HMM).
 
 ![Image](/assets/media/The-Kalman-Filter/HMM.png)
 
@@ -73,8 +73,6 @@ $$ p(\mathbf{x}_k | \mathbf{z}_{1:k-1}) =
        d\mathbf{x}_{k-2} }\right)
    d\mathbf{x}_{k-1} } $$
 
-Observing this, our initial equation holds
-
 ### Updating
 
 So, now that we have the prediction, we want to update given our current measurement $$ \mathbf{z}_k $$. We'll simply use Baye's rule here.
@@ -114,7 +112,7 @@ $$ p(\mathbf{x}_k | \mathbf{z}_{1:k-1}) \leftarrow p(\mathbf{z}_{k}|\mathbf{x}_k
 
 # The Kalman Filter
 
-How is the Kalman filter related to all of this? When we make the assumption that the distribution is *Gaussian*.
+How is the Kalman filter related to all of this? When we make the assumption that the distribution is *Gaussian* (DOUBLE CHECK).
 
 ### Notation
 
@@ -151,7 +149,7 @@ Given these conditions, we want to tract the following quantities:
 * $$ \mathbf{\hat{x}}_k $$, the state estimate
 * $$ \mathbf{P}_k $$, the state estimate error covariance
 
-From these models, we can relate things back to the Bayesian filter [REVISIT, hat?]:
+From these models, we can relate things back to the Bayesian filter [REVISIT]:
 
 $$ p(\mathbf{x}_k | \mathbf{x}_{k-1}) =
   \mathcal{N}(\mathbf{F}_k\mathbf{x}_{k-1} + \mathbf{B}_k\mathbf{u}_k, \mathbf{Q}_k) $$
@@ -159,7 +157,7 @@ $$ p(\mathbf{x}_k | \mathbf{x}_{k-1}) =
 $$ p(\mathbf{z}_k | \mathbf{x}_{k}) =
   \mathcal{N}(\mathbf{H}_k\mathbf{x}_k, \mathbf{R}_k) $$
 
-$$ p(\mathbf{x}_k | \mathbf{z}_{1:k}) = \mathcal{N}(\mathbf{\hat{x}}_k, \mathbf{P}_k) $$
+$$ p(\mathbf{x}_k | \mathbf{z}_{1:k}) = \mathcal{N}(\mathbf{x}_k, \mathbf{P}_k) $$
 
 Given this model, we can derive the predict and update steps. The predict step is given. The update step, however, has a crucial component that must be derived: the Kalman gain $$ \mathbf{K}_k $$.
 
@@ -201,7 +199,9 @@ Given this model, we can derive the predict and update steps. The predict step i
   </tr>
 </table>
 
-The full derivation is beyond the scope of this post, although those interested in learning more are recommended Faragher's introductory paper [1], [], and.
+The full derivation is beyond the scope of this post, although those interested in learning more are recommended Faragher's introductory paper [1], [], and. In summary, the Kalman filter minimizes the square error between the true state and estimated state,
+
+$$ E[ \| \mathbf{x}_{k} - \hat{\mathbf{x}}_{k} \| ] $$
 
 # Experiments
 
@@ -278,10 +278,12 @@ Thus, $ \mathbf{Q} $ can be estimated as
 
 $$ \mathbf{Q} = \mathbf{G}\mathbf{G}^\mathrm{T}\sigma_a^2 $$
 
-$$ \sigma_a $$ is another free parameter that can be estimated by the expected variance of the acceleration. For the sake of argument, the variance is calculated from the original acceleration data as $ Var(\frac{\Delta^2{x}}{\Delta{t}^2}) $.
+$$ \sigma_a $$ is another free parameter that can be estimated by the expected variance of the acceleration. For the sake of argument, the variance is calculated from the original acceleration data as $ Var[\frac{\Delta^2{x}}{\Delta{t}^2}] $. The graphs below show the application of a Kalman filter to estimate velocity in our problem stated. A moving average on the direct calculation of velocity is shown as a comparison.
 
 ![Image](/assets/media/The-Kalman-Filter/position_graph_kalman0.png)
 ![Image](/assets/media/The-Kalman-Filter/velocity_graph_kalman0.png)
+
+It is clear that the Kalman filter performs much better than a moving average at filtering out the noise. The spike at the beginning of the velocity estimation is due to a sort of "rev up" period where the filter has seen few samples and is more susceptible to the corrupting influence of noise. The delay of the filter is inevitable, since a number of samples need to be read to register a change. A more responsive filter would be more noisy. One way to mitigate this effect is to increase the sampling rate.
 
 # Note from the Author
 
