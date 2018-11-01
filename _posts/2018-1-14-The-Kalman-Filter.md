@@ -151,7 +151,7 @@ Given these conditions, we want to tract the following quantities:
 * $$ \mathbf{\hat{x}}_k $$, the state estimate
 * $$ \mathbf{P}_k $$, the state estimate error covariance
 
-From these models, we can relate things back to the Bayesian filter:
+From these models, we can relate things back to the Bayesian filter [REVISIT, hat?]:
 
 $$ p(\mathbf{x}_k | \mathbf{x}_{k-1}) =
   \mathcal{N}(\mathbf{F}_k\mathbf{x}_{k-1} + \mathbf{B}_k\mathbf{u}_k, \mathbf{Q}_k) $$
@@ -252,11 +252,7 @@ This is why we use a Kalman filter. The model calculation is severely corrupted 
 
 In order to implement our Kalman filter, we need to estimate two quantities *a priori*: the observation covariance $\mathbf{R}$ and the state transition covariance $\mathbf{Q}$.
 
-Given we generated the noise, the observation covariance is already known.
-
-$$ \mathbf
-
- While it may seem like there is no state transition covariance in this model, this couldn't be further from the truth; there is a *hidden* control input, acceleration.
+Given we generated the noise, the observation covariance is already known. While it may seem like there is no state transition covariance in this model, this couldn't be further from the truth; there is a *hidden* control input, acceleration.
 
 $$ \mathbf{x}_k = \mathbf{F}\mathbf{x}_{k-1} + \mathbf{G}a_k $$
 
@@ -281,6 +277,11 @@ $$ \begin{pmatrix}
 Thus, $ \mathbf{Q} $ can be estimated as
 
 $$ \mathbf{Q} = \mathbf{G}\mathbf{G}^\mathrm{T}\sigma_a^2 $$
+
+$$ \sigma_a $$ is another free parameter that can be estimated by the expected variance of the acceleration. For the sake of argument, the variance is calculated from the original acceleration data as $ Var(\frac{\Delta^2{x}}{\Delta{t}^2}) $.
+
+![Image](/assets/media/The-Kalman-Filter/position_graph_kalman0.png)
+![Image](/assets/media/The-Kalman-Filter/velocity_graph_kalman0.png)
 
 # Note from the Author
 
