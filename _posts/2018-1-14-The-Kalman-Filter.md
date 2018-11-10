@@ -112,7 +112,7 @@ $$ p(\mathbf{x}_k | \mathbf{z}_{1:k-1}) \leftarrow p(\mathbf{z}_{k}|\mathbf{x}_k
 
 # The Kalman Filter
 
-How is the Kalman filter related to all of this? When we make the assumption that the distribution is *Gaussian* (DOUBLE CHECK).
+The Kalman Filter is one of the most basic implementation of a Bayesian Filters: the distributions of the variables will be continuous and Gaussian distributed. In this case, we simply need to keep track of the mean and covariance of the state we are tracking.
 
 ### Notation
 
@@ -199,13 +199,15 @@ Given this model, we can derive the predict and update steps. The predict step i
   </tr>
 </table>
 
-The full derivation is beyond the scope of this post, although those interested in learning more are recommended Faragher's introductory paper [1], [], and. In summary, the Kalman filter minimizes the square error between the true state and estimated state,
+The full derivation is beyond the scope of this post, although those interested in learning more are recommended references [1], [5], and [6]. In summary, the Kalman filter minimizes the square error between the true state and estimated state,
 
 $$ E[ \| \mathbf{x}_{k} - \hat{\mathbf{x}}_{k} \| ] $$
 
+There are many different formulations of the Kalman filter, and we have covered the most basic formulation.
+
 # Experiments
 
-To illustrate the concept of the Kalman Filter, we will construct a toy example: Given a particle's position over time, we will try to estimate its velocity. For simplicity, we will deal with the 1-D case.
+To illustrate the concept of the Kalman Filter, we will construct a toy example: Given a particle's 1 dimentional position over time, we will try to estimate its velocity.
 
 ### Notation
 
@@ -283,7 +285,7 @@ $$ \sigma_a $$ is another free parameter that can be estimated by the expected v
 ![Image](/assets/media/The-Kalman-Filter/position_graph_kalman0.png)
 ![Image](/assets/media/The-Kalman-Filter/velocity_graph_kalman0.png)
 
-It is clear that the Kalman filter performs much better than a moving average at filtering out the noise. The spike at the beginning of the velocity estimation is due to a sort of "rev up" period where the filter has seen few samples and is more susceptible to the corrupting influence of noise. The delay of the filter is inevitable, since a number of samples need to be read to register a change. A more responsive filter would be more noisy. One way to mitigate this effect is to increase the sampling rate.
+It is clear that the Kalman filter performs much better than a moving average at filtering out the noise. The spike at the beginning of the velocity estimation is due to the beginning period where the filter has seen few samples, is more susceptible to the corrupting influence of noise. The delay of the filter is inevitable, since a number of samples need to be read to register a change. A more responsive filter would be more noisy. One way to mitigate this effect is to increase the sampling rate relative to the rate of change.
 
 # Note from the Author
 
@@ -299,7 +301,7 @@ author = {Liapis, Yannis},
 title = {The Kalman Filter},
 journal = {},
 type = {Blog},
-number = {Jan 29},
+number = {Nov 10},
 year = {2018},
 howpublished = {\url{http://yliapis.github.io}}
 ```
@@ -315,3 +317,7 @@ howpublished = {\url{http://yliapis.github.io}}
 [[3](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/)] T. Babb, "How a Kalman filter works, in pictures", Bzarg, 2015
 
 [[4](https://en.wikipedia.org/wiki/Recursive_Bayesian_estimation)] "Recursive Bayesian estimation", Wikipedia
+
+[[5](http://webee.technion.ac.il/people/shimkin/Estimation09/ch4_KFderiv.pdf)] N. Shimkin, "Derivations of the Discrete-Time Kalman Filter", Israel Institute of Technology, 2009
+
+[[6](https://towardsdatascience.com/kalman-filter-intuition-and-discrete-case-derivation-2188f789ec3a)] V. Yadav, "Kalman filter: Intuition and discrete case derivation", Towards Data Science, 2017
