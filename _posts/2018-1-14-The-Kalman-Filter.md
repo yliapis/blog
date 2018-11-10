@@ -1,5 +1,5 @@
 ---
-title: The Kalman Filter
+title: The Kalman Filter (draft)
 
 #header:
 #  image:
@@ -149,7 +149,7 @@ Given these conditions, we want to tract the following quantities:
 * $$ \mathbf{\hat{x}}_k $$, the state estimate
 * $$ \mathbf{P}_k $$, the state estimate error covariance
 
-From these models, we can relate things back to the Bayesian filter [REVISIT]:
+From these models, we can relate things back to the Bayesian filter:
 
 $$ p(\mathbf{x}_k | \mathbf{x}_{k-1}) =
   \mathcal{N}(\mathbf{F}_k\mathbf{x}_{k-1} + \mathbf{B}_k\mathbf{u}_k, \mathbf{Q}_k) $$
@@ -240,7 +240,7 @@ Now that we have formulated our problem, we generate some synthetic measurement 
 
 $$ \mathbf{z}_k = \mathbf{f}(k\Delta{t}) + \mathbf{\nu_k}, \quad \mathbf{\nu}_k \sim \mathcal{N}(\mathbf{0}, \mathbf{R}) $$
 
-We have chosen our true position to be modeled by the sigmoid[ref] function ( $ \mathbf{f}() $ ) over time.
+We have chosen our true position to be modeled by the sigmoid [7] function ( $ \mathbf{f}() $ ) over time.
 
 ![Image](/assets/media/The-Kalman-Filter/position_graph2.png)
 
@@ -298,7 +298,7 @@ Please cite this post using the BibTex entry below.
 ```
 @misc{
 author = {Liapis, Yannis},
-title = {The Kalman Filter},
+title = {The Kalman Filter (draft)},
 journal = {},
 type = {Blog},
 number = {Nov 10},
@@ -321,3 +321,5 @@ howpublished = {\url{http://yliapis.github.io}}
 [[5](http://webee.technion.ac.il/people/shimkin/Estimation09/ch4_KFderiv.pdf)] N. Shimkin, "Derivations of the Discrete-Time Kalman Filter", Israel Institute of Technology, 2009
 
 [[6](https://towardsdatascience.com/kalman-filter-intuition-and-discrete-case-derivation-2188f789ec3a)] V. Yadav, "Kalman filter: Intuition and discrete case derivation", Towards Data Science, 2017
+
+[[7](https://en.wikipedia.org/wiki/Sigmoid_function)] "Sigmoid function", Wikipedia
