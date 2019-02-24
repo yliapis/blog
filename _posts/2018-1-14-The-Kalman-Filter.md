@@ -1,5 +1,5 @@
 ---
-title: The Kalman Filter (draft)
+title: The Kalman Filter
 
 #header:
 #  image:
