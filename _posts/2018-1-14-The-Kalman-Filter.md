@@ -285,7 +285,7 @@ $$ \sigma_a $$ is another free parameter that can be estimated by the expected v
 ![Image](/assets/media/The-Kalman-Filter/position_graph_kalman0.png)
 ![Image](/assets/media/The-Kalman-Filter/velocity_graph_kalman0.png)
 
-It is clear that the Kalman filter performs much better than a moving average at filtering out the noise. The spike at the beginning of the velocity estimation is due to the beginning period where the filter has seen few samples, is more susceptible to the corrupting influence of noise. The delay of the filter is inevitable, since a number of samples need to be read to register a change. A more responsive filter would be more noisy. One way to mitigate this effect is to increase the sampling rate relative to the rate of change.
+It is clear that the Kalman filter performs much better than a moving average at filtering out the noise. The spike at the beginning of the velocity estimation is due to the beginning period where the filter has seen few samples, is more susceptible to the corrupting influence of noise. The delay of the filter is inevitable, since a number of samples need to be read to register a change. A more responsive filter would be more noisy.
 
 # Note from the Author
 
