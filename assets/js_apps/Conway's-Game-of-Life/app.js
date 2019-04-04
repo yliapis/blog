@@ -1,6 +1,5 @@
 
 // set up two
-// var elem = document.getElementsByName("stage")[0];
 var elem = document.getElementById("stage");
 var params = { width: 500, height: 500 };
 var two = new Two(params).appendTo(elem);
@@ -81,7 +80,8 @@ for (var m = 0; m < ngrid.height; m++) {
     squares[m] = Array(ngrid.width)
     for (var n = 0; n < ngrid.width; n++) {
       var corner = { x: m * step + margin, y: n * step + margin};
-      rect = two.makeRectangle(corner.x, corner.y, size, size);
+      rect = two.makeRectangle(corner.x + step/2, corner.y + step/2,
+                               size, size);
       rect.fill = OFF;
       rect.linewidth = 0;
       squares[m][n] = rect
