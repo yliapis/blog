@@ -87,17 +87,20 @@ function GameofLife(ngrid, frame_step) {
   }
 
   this.grid = initializeGrid(matrix(ngrid.height, ngrid.width));
+  this.buffer = matrix(ngrid.height, ngrid.width);
   this.element_grid = constructElementGrid(this.grid);
 
   this.stepGame = function() {
-    var next = matrix(ngrid.height, ngrid.width);
     for (var m = 0; m < ngrid.height; m++) {
       for (var n = 0; n < ngrid.width; n++) {
-        next[m][n] = updateCell(this.grid[m][n],
+        this.buffer[m][n] = updateCell(this.grid[m][n],
                                 numNeighbors(this.grid, m, n));
       }
     }
-    this.grid = next;
+    // swap buffer
+    var tmp = this.grid;
+    this.grid = this.buffer;
+    this.buffer = tmp;
   }
 
   this.transfer = function() {
