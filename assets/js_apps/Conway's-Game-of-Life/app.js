@@ -1,7 +1,7 @@
 
 // set up two
 var elem = document.getElementById("stage");
-var params = { width: 500, height: 500 };
+var params = { width: 500, height: 500, type: Two.Types.svg};
 var two = new Two(params).appendTo(elem);
 var margin = 0;
 
@@ -10,7 +10,8 @@ let OFF = "white";
 
 // define grid parameters
 var ngrid = { width: 50, height: 50 };
-
+// 60 / fps
+var frame_step = 1;
 // ratio of dead/alive cells at startup
 var P = 0.5;
 
@@ -80,6 +81,7 @@ function GameofLife(ngrid, frame_step) {
                                  step, step);
         rect.fill = OFF;
         rect.linewidth = 0;
+        rect.stroke = OFF;
         element_grid[m][n] = rect
       }
     }
@@ -115,8 +117,8 @@ function GameofLife(ngrid, frame_step) {
 
   two.bind("update", function(frameCount) {
     if (!(frameCount % frame_step)) {
-      self.stepGame();
       self.transfer();
+      self.stepGame();
     }
   });
 
@@ -133,5 +135,5 @@ function GameofLife(ngrid, frame_step) {
 }
 
 // play game
-var game = new GameofLife(ngrid);
+var game = new GameofLife(ngrid, frame_step);
 game.play();
