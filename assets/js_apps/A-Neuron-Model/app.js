@@ -13,7 +13,7 @@ var graph_params = {
   margin: { left: 25, right: 25, top: 25, bottom: 25 },
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
-  axis: { color: "black", width: 0.5, tick_length: 8,
+  axis: { color: "black", width: 0.5, tick_length: 5,
           nxticks: 11, nyticks: 11 }
 }
 _.extend(graph_params, params);
@@ -47,7 +47,7 @@ function makeXAxis(params) {
   // create ticks
   const step = axis_len / params.axis.nxticks;
   var ticks = []
-  for (var i = 0; i < params.axis.nxticks; i++) {
+  for (var i = 0; i <= params.axis.nxticks; i++) {
     let x = i*step;
     let tick = two.makePath(x, 0, x, params.axis.tick_length);
     tick.stroke = params.axis.color;
@@ -70,6 +70,17 @@ function makeYAxis(params) {
   axis.stroke = params.axis.color;
   axis.linewidth = params.axis.width;
   yaxis.add(axis);
+  // create ticks
+  const step = axis_len / params.axis.nyticks;
+  var ticks = []
+  for (var i = 0; i <= params.axis.nyticks; i++) {
+    let y = axis_len - i*step;
+    let tick = two.makePath(0, y, -params.axis.tick_length, y);
+    tick.stroke = params.axis.color;
+    tick.linewidth = params.axis.width;
+    ticks.push(tick);
+  }
+  yaxis.add(ticks);
   return yaxis;
 }
 
