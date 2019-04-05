@@ -134,6 +134,7 @@ function plotData(stage, data, params) {
   path.linewidth = 1;
   path.closed = false;
   stage.add(path);
+  stage.trace = path
 }
 
 function shift(stage, params) {
@@ -154,14 +155,21 @@ function NeuronGraph(params) {
 
   this.stage = makeStage(params);
 
-  let data = genData(256);
+  let data = genData(1024);
 
   plotData(stage, data, params);
+
+  let dx = 256/(params.width - (params.margin.left + params.margin.right));
+  let tx = dx;
 
   two.bind("update", function(frameCount) {
     if (!(frameCount % params.frame_step)) {
       // shift(stage, params);
-      stage.children[0].vertices.pop()
+      stage.trace.remove();
+      data.pop()
+      plotData(stage, data, params);
+      // stage.children[0].translation.set(tx, 0);
+      tx += dx;
     }
   });
 
