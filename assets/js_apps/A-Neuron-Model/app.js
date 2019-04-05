@@ -14,7 +14,8 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11 }
+          nxticks: 11, nyticks: 11 },
+  frame_step: 1
 }
 _.extend(graph_params, params);
 
@@ -84,6 +85,60 @@ function makeYAxis(params) {
   return yaxis;
 }
 
+function makeStage(params) {
+  stage = two.makeGroup();
+  stage.translation.set(
+    params.margin.left,
+    params.margin.top);
+  // stage.scale(
+  //   params.width - (params.margin.left + params.margin.right),
+  //   params.height - (params.margin.top + params.margin.bottom));
+  return stage;
+}
+
+
+function genData(num_points) {
+  let N = num_points;
+  arr = new Array(N)
+  for (var i = 0; i < N; i++) {
+    arr[i] = Math.random();
+  }
+  return arr;
+}
+
+
+function plotData(stage, data, params) {
+
+  function mapx(x) {
+    return x * (params.width -
+                (params.margin.left + params.margin.right));
+  }
+  
+  function mapy(y) {
+    return y * (params.height -
+                (params.margin.top + params.margin.bottom));
+  }
+
+  let x = new Array(data.length);
+  for (var i = 0; i < x.length; i++)
+    x[i] = mapx(i / x.length);
+
+  let y = data.map(mapy);
+
+  var anchors = []
+  for (var i = 0; i < y.length; i++)
+    anchors.push(new Two.Anchor(x[i], y[i]));
+
+  let path = two.makePath(anchors);
+  path.stroke = "green";
+  path.linewidth = 1;
+  path.closed = false;
+  stage.add(path);
+}
+
+function shift(stage, params) {
+
+}
 
 // graph construction
 function NeuronGraph(params) {
@@ -97,12 +152,28 @@ function NeuronGraph(params) {
     yaxis: makeYAxis(params)
   }
 
+  this.stage = makeStage(params);
+
+  let data = genData(256);
+
+  plotData(stage, data, params);
+
+  two.bind("update", function(frameCount) {
+    if (!(frameCount % params.frame_step)) {
+      // shift(stage, params);
+      stage.children[0].vertices.pop()
+    }
+  });
+
+  this.play = function() { two.play(); }
+
   return this;
 
 }
 
 
 var graph = new NeuronGraph(graph_params);
-two.update();
+// two.update();
+graph.play();
 
-console.log("run 2");
+console.log("run 4");
