@@ -26,7 +26,8 @@ function matrix(m, n) {
 // Game object constructor
 function GameofLife(ngrid, frame_step) {
 
-  var step = ngrid.width/params.width;
+  var self = this;
+  var step = params.width / ngrid.width;
   var frame_step = frame_step | 2;
   var ngrid = ngrid;
   
@@ -69,17 +70,6 @@ function GameofLife(ngrid, frame_step) {
     }
   }
 
-  function stepGame(grid) {
-    var next = matrix(ngrid.height, ngrid.width);
-    for (var m = 0; m < ngrid.height; m++) {
-      for (var n = 0; n < ngrid.width; n++) {
-        next[m][n] = updateCell(grid[m][n],
-                                numNeighbors(grid, m, n));
-      }
-    }
-    return next;
-  }
-
   function constructElementGrid(grid) {
     var element_grid = Array(ngrid.height);
     for (var m = 0; m < ngrid.height; m++) {
@@ -99,7 +89,18 @@ function GameofLife(ngrid, frame_step) {
   this.grid = initializeGrid(matrix(ngrid.height, ngrid.width));
   this.element_grid = constructElementGrid(this.grid);
 
-  function transfer() {
+  this.stepGame = function() {
+    var next = matrix(ngrid.height, ngrid.width);
+    for (var m = 0; m < ngrid.height; m++) {
+      for (var n = 0; n < ngrid.width; n++) {
+        next[m][n] = updateCell(this.grid[m][n],
+                                numNeighbors(this.grid, m, n));
+      }
+    }
+    this.grid = next;
+  }
+
+  this.transfer = function() {
     for (var m = 0; m < ngrid.height; m++) {
       for (var n = 0; n < ngrid.width; n++) {
         rect = this.element_grid[m][n];
@@ -111,12 +112,12 @@ function GameofLife(ngrid, frame_step) {
 
   two.bind("update", function(frameCount) {
     if (!(frameCount % frame_step)) {
-      this.grid = stepGame(this.grid);
-      transfer();
+      self.stepGame();
+      self.transfer();
     }
   });
 
-  console.log("run 7");
+  console.log("run 8");
   
   this.play = function() { two.play(); }
   this.pause = function() { two.pause(); }
