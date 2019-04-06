@@ -1,9 +1,8 @@
 
 /* NOTE: I did not use d3 or another visual analytics
- * libraryas a learning experience
- * building everything from the ground up,
- * and because I am not a fan of its API (especially
- * for animations)
+ * libraryas a learning experience building everything
+ * from the ground up, and because I am not a fan of 
+ * its API (especially for animations)
  */
 
 // set up two
@@ -44,8 +43,11 @@ function NeuronData () {
   this.n_points = 256;
   this.dt = this.T / (this.n_points - 1);
   this.data = new Array(this.n_points);
-  for (var i = 0; i < data.length; i++)
-    data[i] = this.vreset;
+  for (var i = 0; i < this.n_points; i++)
+    this.data[i] = this.vreset;
+  this.time = new Array(this.n_points);
+  for (var i = 0; i < this.n_points; i++)
+    this.time[i] = this.dt * i - this.T;
 
   this.inputs = function () {
     let e = 0, i = 0;
@@ -61,7 +63,7 @@ function NeuronData () {
   };
 
   this.next = function() {
-    let vm = this.data.last();
+    let vm = this.data[this.data.length - 1];
     if (vm > this.vt)
       return this.vreset;
     else
@@ -79,8 +81,6 @@ function NeuronData () {
 
   }
 }
-
-neuron_data = new NeuronData();
 
 // helper functions
 function makeBorder(params) {
@@ -152,9 +152,16 @@ function makeStage(params) {
   stage.translation.set(
     params.margin.left,
     params.margin.top);
-  // stage.scale(
-  //   params.width - (params.margin.left + params.margin.right),
-  //   params.height - (params.margin.top + params.margin.bottom));
+  stage.attrs = {
+    scale: {
+      width: params.width - (params.margin.left + params.margin.right),
+      height: params.height - (params.margin.top + params.margin.bottom)
+    },
+    origin : {
+      x: params.margin.left,
+      y: params.margin.top
+    }
+  };
   return stage;
 }
 
@@ -172,35 +179,41 @@ function genData(num_points) {
 function plotData(stage, data, params) {
 
   function mapx(x) {
-    return x * (params.width -
-                (params.margin.left + params.margin.right));
+    return (stage.attrs.origin.x + 
+            Math.random() * 100);
+    // return x * (params.width -
+    //             (params.margin.left + params.margin.right));
   }
   
   function mapy(y) {
-    return (1 - y) * (params.height -
-                (params.margin.top + params.margin.bottom));
+    return (stage.attrs.origin.y + stage.attrs.scale.height - 
+            Math.random() * 100);
+    // return (1 - y) * (params.height -
+    //             (params.margin.top + params.margin.bottom));
   }
 
-  let x = new Array(data.length);
+  let x = data.time;
   for (var i = 0; i < x.length; i++)
-    x[i] = mapx(i / x.length);
+    x[i] = mapx(x[i]);
 
-  let y = data.map(mapy);
+  let y = data.data.map(mapy);
 
   var anchors = []
   for (var i = 0; i < y.length; i++)
     anchors.push(new Two.Anchor(x[i], y[i]));
 
   let path = two.makePath(anchors);
-  path.stroke = "green";
+  path.stroke = "purple";
   path.linewidth = 1;
   path.closed = false;
   stage.add(path);
-  stage.trace = path
+  stage.trace = path;
 }
 
 // graph construction
 function NeuronGraph(params) {
+
+  let self = this;
 
   // create border
   this.border = makeBorder(params);
@@ -213,21 +226,14 @@ function NeuronGraph(params) {
 
   this.stage = makeStage(params);
 
-  let data = genData(1024);
+  this.neuron_data = new NeuronData();
 
-  plotData(stage, data, params);
-
-  let dx = 256/(params.width - (params.margin.left + params.margin.right));
-  let tx = dx;
+  plotData(this.stage, this.neuron_data, params);
 
   two.bind("update", function(frameCount) {
     if (!(frameCount % params.frame_step)) {
-      // shift(stage, params);
-      stage.trace.remove();
-      data.pop()
-      plotData(stage, data, params);
-      // stage.children[0].translation.set(tx, 0);
-      tx += dx;
+      self.stage.trace.remove();
+      plotData(self.stage, self.neuron_data, params);
     }
   });
 
@@ -240,7 +246,7 @@ function NeuronGraph(params) {
 
 
 var graph = new NeuronGraph(graph_params);
-// two.update();
-graph.play();
+two.update();
+// graph.play();
 
-console.log("run 4");
+console.log("run 5");
