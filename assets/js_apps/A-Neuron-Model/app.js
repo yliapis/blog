@@ -1,7 +1,10 @@
 
-// NOTE: I did not use d3 as a learning experience,
-// and because I am not a fan of its API (especially
-// for animations)
+/* NOTE: I did not use d3 or another visual analytics
+ * libraryas a learning experience
+ * building everything from the ground up,
+ * and because I am not a fan of its API (especially
+ * for animations)
+ */
 
 // set up two
 var elem = document.getElementById("stage");
@@ -106,6 +109,13 @@ function genData(num_points) {
   return arr;
 }
 
+function stepNeuron() {
+  // Izhikevich
+
+  // leaky integrate and fire model
+  // <not implemented>
+}
+
 
 function plotData(stage, data, params) {
 
@@ -115,7 +125,7 @@ function plotData(stage, data, params) {
   }
   
   function mapy(y) {
-    return y * (params.height -
+    return (1 - y) * (params.height -
                 (params.margin.top + params.margin.bottom));
   }
 
