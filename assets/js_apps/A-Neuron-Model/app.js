@@ -49,6 +49,11 @@ function NeuronData () {
   for (var i = 0; i < this.n_points; i++)
     this.time[i] = this.dt * i - this.T;
 
+  this.attrs = {
+    xmin: -500e-3, xmax: 0,
+    ymin: -100e-3, ymax: 50e-3
+  }
+
   this.inputs = function () {
     let e = 0, i = 0;
     for (var n = 0; n < this.num_excitory; n++)
@@ -179,17 +184,14 @@ function genData(num_points) {
 function plotData(stage, data, params) {
 
   function mapx(x) {
-    return (stage.attrs.origin.x + 
-            Math.random() * 100);
-    // return x * (params.width -
-    //             (params.margin.left + params.margin.right));
+    // return (Math.random() * stage.attrs.scale.width);
+    return stage.attrs.scale.width * (0.5 - x *
+            (data.attrs.xmax - data.attrs.xmin));
   }
   
   function mapy(y) {
-    return (stage.attrs.origin.y + stage.attrs.scale.height - 
-            Math.random() * 100);
-    // return (1 - y) * (params.height -
-    //             (params.margin.top + params.margin.bottom));
+    // return (stage.attrs.scale.height - Math.random() * stage.attrs.scale.height);
+     return stage.attrs.scale.height * (y / (data.attrs.ymax - data.attrs.ymin));
   }
 
   let x = data.time;
