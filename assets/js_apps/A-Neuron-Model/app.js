@@ -22,6 +22,60 @@ var graph_params = {
 }
 _.extend(graph_params, params);
 
+// neurom data constructor
+function NeuronData () {
+  
+  this.data = new Array(256);
+
+  this.type = "izhikevich";
+  
+  this.dt = 1e-3;
+  this.tau = 10e-3;
+  this.num_excitory = 64;
+  this.num_inhibitory = 64;
+  this.p_fire_e = 0.2;
+  this.p_fire_i = 0.2;
+  
+  this.I = 30e-3;
+
+  this.I = function () {
+    let e = 0, i = 0;
+    for (var n = 0; n < this.num_excitory; n++)
+      e += (Math.rand() < p_fire_e);
+    for (var n = 0; n < this.num_inhibitory; n++)
+      i += (Math.rand() < p_fire_i);
+    return {
+      excitory: e,
+      inhibitory: i,
+      total: e - i
+    };
+  };
+  
+  this.R = 10;
+
+  this.next = function() {
+
+  }
+
+  this.step = function () {
+    // Izhikevich
+
+    if (this.type === "izhikevich") {
+      this.data.shift();
+      this.data.push(
+        this.data.last() + this.dt * (
+        this.E - this.data.last() +
+        this.R * this.I().total) / this.tau
+      );
+    }
+
+    // leaky integrate and fire model
+    // <not implemented>
+  };
+
+  return this;
+};
+var neuron_data = new NeuronData();
 
 // helper functions
 function makeBorder(params) {
@@ -107,13 +161,6 @@ function genData(num_points) {
     arr[i] = Math.random();
   }
   return arr;
-}
-
-function stepNeuron() {
-  // Izhikevich
-
-  // leaky integrate and fire model
-  // <not implemented>
 }
 
 
