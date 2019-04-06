@@ -24,21 +24,30 @@ _.extend(graph_params, params);
 
 // neurom data constructor
 function NeuronData () {
-  
-  this.data = new Array(256);
 
-  this.type = "izhikevich";
-  
-  this.dt = 1e-3;
-  this.tau = 10e-3;
   this.num_excitory = 64;
   this.num_inhibitory = 64;
   this.p_fire_e = 0.2;
   this.p_fire_i = 0.2;
-  
-  this.I = 30e-3;
 
-  this.I = function () {
+  this.dt = 200e-6;
+
+  this.vt = -30e-3;
+  this.ve = -75e-3
+  this.vreset = -80e-3;
+
+  this.taum = 10e-3;
+  this.Rm = 10e-6;
+  this.Iscale = 50e-9;
+
+  this.T = 500e-3;
+  this.n_points = 256;
+  this.dt = this.T / (this.n_points - 1);
+  this.data = new Array(this.n_points);
+  for (var i = 0; i < data.length; i++)
+    data[i] = this.vreset;
+
+  this.inputs = function () {
     let e = 0, i = 0;
     for (var n = 0; n < this.num_excitory; n++)
       e += (Math.rand() < p_fire_e);
@@ -50,32 +59,28 @@ function NeuronData () {
       total: e - i
     };
   };
-  
-  this.R = 10;
 
   this.next = function() {
-
+    let vm = this.data.last();
+    if (vm > this.vt)
+      return this.vreset;
+    else
+      return (vm + this.dt * (
+        -(vm - this.ve) +
+        (this.inputs * this.Iscale) * this.Rm) / 
+        this.taum);
   }
 
   this.step = function () {
     // Izhikevich
-
-    if (this.type === "izhikevich") {
+      let next = this.next();
       this.data.shift();
-      this.data.push(
-        this.data.last() + this.dt * (
-        this.E - this.data.last() +
-        this.R * this.I().total) / this.tau
-      );
-    }
+      this.data.push(next);
 
-    // leaky integrate and fire model
-    // <not implemented>
-  };
+  }
+}
 
-  return this;
-};
-var neuron_data = new NeuronData();
+neuron_data = new NeuronData();
 
 // helper functions
 function makeBorder(params) {
@@ -194,10 +199,6 @@ function plotData(stage, data, params) {
   stage.trace = path
 }
 
-function shift(stage, params) {
-
-}
-
 // graph construction
 function NeuronGraph(params) {
 
@@ -208,7 +209,7 @@ function NeuronGraph(params) {
   this.axis = {
     xaxis: makeXAxis(params),
     yaxis: makeYAxis(params)
-  }
+  };
 
   this.stage = makeStage(params);
 
@@ -230,7 +231,8 @@ function NeuronGraph(params) {
     }
   });
 
-  this.play = function() { two.play(); }
+  this.play = function() { two.play(); };
+  this.pause = function() { two.pause(); };
 
   return this;
 
