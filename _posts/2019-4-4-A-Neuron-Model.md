@@ -22,7 +22,7 @@ category: posts
                left:100px;" -->
       <img id="play_symbol" src="/assets/media/images/play.svg" height="16" width="16"/>
       </button>
-      <input type="range" min="0" max="50" value="12" id="I"
+      <input type="range" min="0" max="35" value="12" id="I"
         style="height=16px;
                width:500px;
                -webkit-appearance:none;

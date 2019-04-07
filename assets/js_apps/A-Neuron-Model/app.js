@@ -15,13 +15,13 @@ var two = new Two(params).appendTo(elem);
 
 // graph params
 var graph_params = {
-  margin: { left: 50, right: 25, top: 25, bottom: 25 },
+  margin: { left: 65, right: 25, top: 25, bottom: 25 },
   border: { width: 2, radius: 4, offset: 22.5, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
           nxticks: 11, nyticks: 11, gridline_width:0.05,
           xtick_offset: 7 },
-  trace: { color: "steelblue", width: 2.5},
+  trace: { color: "steelblue", color2: "orange", width: 2.5},
   frame_step: 1
 }
 _.extend(graph_params, params);
@@ -47,8 +47,11 @@ function NeuronData () {
   this.dt = this.T / (this.n_points - 1);
 
   this.data = new Array(this.n_points);
-  for (var i = 0; i < this.n_points; i++)
+  this.current = new Array(this.n_points);
+  for (var i = 0; i < this.n_points; i++) {
     this.data[i] = this.vreset;
+    this.current[i] = 0.0;
+  }
   
   this.time = new Array(this.n_points);
   for (var i = 0; i < this.n_points; i++)
@@ -64,18 +67,22 @@ function NeuronData () {
     // Leaky integrate and fire
     if (this.model === "LIR") {
       let I = (function () { return self.I })();
+      let v;
       if (vm > this.vt)
-        return this.vreset;
+        v = this.vreset;
       else
-        return (vm + this.dt * (
+        v = (vm + this.dt * (
           -(vm - this.ve) + I * this.Rm) / this.taum);
+      return {V: v, I: I};
     }
   }
 
   this.step = function () {
     let next = this.next();
     this.data.shift();
-    this.data.push(next);
+    this.data.push(next.V);
+    this.current.shift();
+    this.current.push(next.I);
   }
 }
 
@@ -206,13 +213,22 @@ function makeYAxis(params, min, max) {
   // text label
   const ylabel = new Two.Text(
     "Membrane Voltage (uV)",
-    -24,
+    -40,
     axis_len / 2
     );
   ylabel.rotation = Math.PI * 3 / 2;;
   ylabel.size = 12;
   ylabel.fill = params.trace.color;
   yaxis.add(ylabel);
+  const ylabel2 = new Two.Text(
+    "Injected Current (nA)",
+    -24,
+    axis_len / 2
+    );
+  ylabel2.rotation = Math.PI * 3 / 2;;
+  ylabel2.size = 12;
+  ylabel2.fill = params.trace.color2;
+  yaxis.add(ylabel2);
   //
   return yaxis;
 }
@@ -254,25 +270,47 @@ function plotData(stage, data, params) {
             (data.attrs.xmax - data.attrs.xmin));
   }
   
+
   function mapy(y) {
     return stage.attrs.scale.height * ((y - data.attrs.ymin) /
             (data.attrs.ymax - data.attrs.ymin));
   }
 
+  function mapy2(y) {
+    return stage.attrs.scale.height * (1 - (y * 1e6 - data.attrs.ymin) /
+           (data.attrs.ymax - data.attrs.ymin));
+  }
+
   let x = data.time.map(mapx);
   let y = data.data.map(mapy);
+  let y2 = data.current.map(mapy2);
+  debugger;
 
-  var anchors = []
+  // plot current
+  let c_anchors = [];
+  for (var i = 0; i < y2.length; i++)
+    c_anchors.push(new Two.Anchor(x[i], y2[i]));
+
+  let cpath = two.makePath(c_anchors);
+  cpath.stroke = params.trace.color2;
+  cpath.linewidth = params.trace.width;
+  cpath.closed = false;
+  cpath.fill = "transparent";
+  stage.add(cpath);
+  stage.dtrace = cpath;
+
+  // plot data
+  let d_anchors = [];
   for (var i = 0; i < y.length; i++)
-    anchors.push(new Two.Anchor(x[i], y[i]));
+    d_anchors.push(new Two.Anchor(x[i], y[i]));
 
-  let path = two.makePath(anchors);
-  path.stroke = params.trace.color;
-  path.linewidth = params.trace.width;
-  path.closed = false;
-  path.fill = "transparent";
-  stage.add(path);
-  stage.trace = path;
+  let dpath = two.makePath(d_anchors);
+  dpath.stroke = params.trace.color;
+  dpath.linewidth = params.trace.width;
+  dpath.closed = false;
+  dpath.fill = "transparent";
+  stage.add(dpath);
+  stage.ctrace = dpath;
 }
 
 
@@ -303,7 +341,8 @@ function NeuronGraph(params) {
 
   two.bind("update", function(frameCount) {
     if (!(frameCount % params.frame_step)) {
-      self.stage.trace.remove();
+      self.stage.ctrace.remove();
+      self.stage.dtrace.remove();
       self.neuron_data.step();
       plotData(self.stage, self.neuron_data, params);
       // console.log("update");
