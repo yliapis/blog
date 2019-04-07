@@ -107,15 +107,15 @@ function makeXAxis(params, min, max) {
   // offset from 0 on y axis, in ticks
   // this is if we have negative values in data to represent
   let offset = -params.axis.xtick_offset * (
-                other_len / (params.axis.nxticks));
+                other_len / (params.axis.nxticks - 1));
   var axis = two.makePath(0, offset, axis_len, offset);
   axis.stroke = params.axis.color;
   axis.noFill();
   xaxis.add(axis);
   // create ticks
-  const step = axis_len / params.axis.nxticks;
+  const step = axis_len / (params.axis.nxticks - 1);
   var ticks = [];
-  for (var i = 0; i <= params.axis.nxticks; i++) {
+  for (var i = 0; i < params.axis.nxticks; i++) {
     let x = i*step;
     let tick = two.makePath(x, offset, x, offset + params.axis.tick_length);
     tick.stroke = params.axis.color;
@@ -126,7 +126,7 @@ function makeXAxis(params, min, max) {
   // gridlines
   const gridline_len = params.height - (params.margin.top + params.margin.bottom);
   gridlines = [];
-  for (var i = 0; i <= params.axis.nxticks; i++) {
+  for (var i = 0; i < params.axis.nxticks; i++) {
     let x =  i * step;
     let gridline = two.makePath(x, -gridline_len, x, 0);
     gridline.stroke = params.axis.color;
@@ -135,6 +135,17 @@ function makeXAxis(params, min, max) {
     gridlines.push(gridline);
   }
   xaxis.add(gridlines);
+  // numbers
+  numbers = [];
+  for (var i = 0; i < params.axis.nxticks; i++) {
+    let x = i*step;
+    let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
+    let number = new Two.Text(val, x, offset + params.axis.tick_length + 1);
+    number.size = 8;
+    number.alignment = "center";
+    numbers.push(number);
+  }
+  xaxis.add(numbers);
   return xaxis;
 }
 
@@ -151,7 +162,7 @@ function makeYAxis(params, min, max) {
   axis.linewidth = params.axis.width;
   yaxis.add(axis);
   // create ticks
-  const step = axis_len / params.axis.nyticks;
+  const step = axis_len / (params.axis.nyticks - 1);
   var ticks = [];
   for (var i = 0; i <= params.axis.nyticks; i++) {
     let y = axis_len - i*step;
@@ -164,7 +175,7 @@ function makeYAxis(params, min, max) {
   // gridlines
   const gridline_len = params.width - (params.margin.left + params.margin.right);
   gridlines = [];
-  for (var i = 0; i <= params.axis.nyticks; i++) {
+  for (var i = 0; i < params.axis.nyticks; i++) {
     let y = axis_len - i * step;
     let gridline = two.makePath(0, y, gridline_len, y);
     gridline.stroke = params.axis.color;
@@ -175,7 +186,7 @@ function makeYAxis(params, min, max) {
   yaxis.add(gridlines);
   // numbers
   numbers = [];
-  for (var i = 0; i <= params.axis.nyticks; i++) {
+  for (var i = 0; i < params.axis.nyticks; i++) {
     let y = axis_len - i*step;
     let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
     let number = new Two.Text(val, -params.axis.tick_length - 1, y);
@@ -220,13 +231,11 @@ function genData(num_points) {
 function plotData(stage, data, params) {
 
   function mapx(x) {
-    // return (Math.random() * stage.attrs.scale.width);
     return stage.attrs.scale.width * ((x - data.attrs.xmin) /
             (data.attrs.xmax - data.attrs.xmin));
   }
   
   function mapy(y) {
-    // return (stage.attrs.scale.height - Math.random() * stage.attrs.scale.height);
     return stage.attrs.scale.height * ((y - data.attrs.ymin) /
             (data.attrs.ymax - data.attrs.ymin));
   }
