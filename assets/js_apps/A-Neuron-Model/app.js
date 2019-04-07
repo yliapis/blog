@@ -16,7 +16,7 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11 },
+          nxticks: 11, nyticks: 11, gridline_width: 10},
   frame_step: 1
 }
 _.extend(graph_params, params);
@@ -137,6 +137,17 @@ function makeYAxis(params) {
     ticks.push(tick);
   }
   yaxis.add(ticks);
+  // gridlines
+  let gridline_len = params.width - (params.margin.left + params.margin.right);
+  gridlines = []
+  for (var i = 0; i <= params.axis.nyticks; i++) {
+    let y = axis_len - i * step;
+    let gridline = two.makePath(0, y, gridline_len, y);
+    gridline.stroke = params.axis.color;
+    gridline.linewidth = params.axis.gridline_width;
+    gridlines.push(gridline);
+  }
+  yaxis.add(gridlines);
   return yaxis;
 }
 
