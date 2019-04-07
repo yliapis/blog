@@ -26,16 +26,16 @@ function NeuronData () {
 
   this.num_excitory = 64;
   this.num_inhibitory = 64;
-  this.p_fire_e = 0.5;
+  this.p_fire_e = 0.60;
   this.p_fire_i = 0.05;
 
-  this.vt = -30e-3;
+  this.vt = 30e-3;
   this.ve = -75e-3
   this.vreset = -80e-3;
 
   this.taum = 10e-3;
   this.Rm = 10e6;
-  this.Iscale = 10e-9 / this.num_excitory;
+  this.Iscale = 5e-9 / 15;
 
   this.T = 500e-3;
   this.n_points = 256;
@@ -190,7 +190,7 @@ function plotData(stage, data, params) {
   
   function mapy(y) {
     // return (stage.attrs.scale.height - Math.random() * stage.attrs.scale.height);
-    return stage.attrs.scale.height * (1 - (y - data.attrs.ymin) /
+    return stage.attrs.scale.height * ((y - data.attrs.ymin) /
             (data.attrs.ymax - data.attrs.ymin));
   }
   // debugger;
