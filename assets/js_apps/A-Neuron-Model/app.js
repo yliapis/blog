@@ -235,20 +235,11 @@ function NeuronGraph(params) {
 }
 
 // components
-
-function makeRangeSlider() {
-
-}
-
-function makeButton() {
-
-}
-
-
 var graph = new NeuronGraph(graph_params);
 graph.play();
 
-// callbacks
+// input callbacks
+// current
 var current_slider = document.getElementById("I");
 graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
 
@@ -256,10 +247,16 @@ current_slider.oninput = function() {
   graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
 }
 
+// play
 var play_button = document.getElementById("play")
+var play = true;
 
-function play() {
-  graph.play();
+play_button.onclick = function() {
+  if (play)
+    graph.pause();
+  else
+    graph.play();
+  play = !play;
 }
 
 function pause() {
