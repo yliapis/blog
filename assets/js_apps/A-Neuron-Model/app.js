@@ -24,10 +24,9 @@ _.extend(graph_params, params);
 // neurom data constructor
 function NeuronData () {
 
-  this.num_excitory = 64;
-  this.num_inhibitory = 64;
-  this.p_fire_e = 0.60;
-  this.p_fire_i = 0.05;
+  self = this;
+
+  this.model = "LIR"
 
   this.vt = 30e-3;
   this.ve = -75e-3
@@ -35,9 +34,9 @@ function NeuronData () {
 
   this.taum = 10e-3;
   this.Rm = 10e6;
-  this.Iscale = 5e-9 / 15;
+  this.I = 10e-9;
 
-  this.T = 500e-3;
+  this.T = 100e-3;
   this.n_points = 256;
   this.dt = this.T / (this.n_points - 1);
 
@@ -50,32 +49,22 @@ function NeuronData () {
     this.time[i] = this.dt * i - this.T;
 
   this.attrs = {
-    xmin: -500e-3, xmax: 0,
+    xmin: -this.T, xmax: 0,
     ymin: -100e-3, ymax: 50e-3
   }
 
-  this.inputs = function () {
-    let e = 0, i = 0;
-    for (var n = 0; n < this.num_excitory; n++)
-      e += (Math.random() < this.p_fire_e);
-    for (var n = 0; n < this.num_inhibitory; n++)
-      i += (Math.random() < this.p_fire_i);
-    return {
-      excitory: e,
-      inhibitory: i,
-      total: e - i
-    };
-  };
-
   this.next = function() {
     let vm = this.data[this.data.length - 1];
-    if (vm > this.vt)
-      return this.vreset;
-    else
-      return (vm + this.dt * (
-        -(vm - this.ve) +
-        (this.inputs().total * this.Iscale) * this.Rm) / 
-        this.taum);
+    // Leaky integrate and fire
+    if (this.model === "LIR") {
+      let I = (function () { return self.I })();
+      debugger;
+      if (vm > this.vt)
+        return this.vreset;
+      else
+        return (vm + this.dt * (
+          -(vm - this.ve) + I * this.Rm) / this.taum);
+    }
   }
 
   this.step = function () {
@@ -245,9 +234,34 @@ function NeuronGraph(params) {
 
 }
 
+// components
+
+function makeRangeSlider() {
+
+}
+
+function makeButton() {
+
+}
+
 
 var graph = new NeuronGraph(graph_params);
-// two.update();
 graph.play();
 
-console.log("run 5");
+// callbacks
+var current_slider = document.getElementById("I");
+graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
+
+current_slider.oninput = function() {
+  graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
+}
+
+var play_button = document.getElementById("play")
+
+function play() {
+  graph.play();
+}
+
+function pause() {
+  graph.pause();
+}
