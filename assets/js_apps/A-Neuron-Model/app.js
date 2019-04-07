@@ -16,7 +16,7 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11, xtick_offset: 5 },
+          nxticks: 11, nyticks: 11, xtick_offset: 4 },
   frame_step: 1
 }
 _.extend(graph_params, params);
