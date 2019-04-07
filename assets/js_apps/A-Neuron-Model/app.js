@@ -254,14 +254,21 @@ current_slider.oninput = function() {
 }
 
 // play
-var play_button = document.getElementById("play")
+var play_button = document.getElementById("play");
+var play_img = document.getElementById("play_symbol");
+const play_img_src = "/assets/media/images/play.svg";
+const pause_img_src = "/assets/media/images/pause.svg";
+play_img.src = pause_img_src;
 var play = true;
 
 play_button.onclick = function() {
-  if (play)
+  if (play) {
     graph.pause();
-  else
+    play_img.src = play_img_src;
+  } else {
     graph.play();
+    play_img.src = pause_img_src;
+  }
   play = !play;
 }
 
