@@ -16,7 +16,7 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11, gridline_width: 2},
+          nxticks: 11, nyticks: 11, xtick_offset: 5 },
   frame_step: 1
 }
 _.extend(graph_params, params);
@@ -95,17 +95,23 @@ function makeXAxis(params) {
   // make line
   var xaxis = two.makeGroup();
   const axis_len = params.width - (params.margin.left + params.margin.right);
+  const other_len = params.height - (params.margin.top + params.margin.bottom);
   xaxis.translation.set(
     params.margin.left,
     params.height - params.margin.bottom);
-  var axis = two.makePath(0, 0, axis_len, 0);
+  // offset from 0 on y axis, in ticks
+  // this is if we have negative values in data to represent
+  let offset = -params.axis.xtick_offset * (
+                other_len / (params.axis.nxticks));
+  var axis = two.makePath(0, offset, axis_len, offset);
+  axis.stroke = params.axis.color;
   xaxis.add(axis);
   // create ticks
   const step = axis_len / params.axis.nxticks;
   var ticks = []
   for (var i = 0; i <= params.axis.nxticks; i++) {
     let x = i*step;
-    let tick = two.makePath(x, 0, x, params.axis.tick_length);
+    let tick = two.makePath(x, offset, x, offset + params.axis.tick_length);
     tick.stroke = params.axis.color;
     tick.linewidth = params.axis.width;
     ticks.push(tick);
