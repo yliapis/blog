@@ -10,12 +10,16 @@ Cool graph, though
 
 
 <html>
+  <link rel="stylesheet" type="text/css" href="/assets/css/io.css">
   <base href="/assets/js_apps/A-Neuron-Model/"/>
   <head></head>
   <body>
     <div id="stage" padding="0 px"></div>
     <div id="controls">
-      <button type="image" id="play">
+      <button type="image" id="play" style="
+        padding:0;
+        border:none;
+        background:none;">
 <!--       style="height:25px;
                width:50px;
                top:10px;
@@ -24,7 +28,11 @@ Cool graph, though
       </button>
       <input type="range" min="1" max="100" value="12" id="I"
         style="height=20px;
-               width:500px;"/>
+               width:500px;
+               -webkit-appearance:none;
+               border:none;
+               background:none;
+               "/>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js"></script>
     <script src="/assets/js_libs/lodash.js"></script>
