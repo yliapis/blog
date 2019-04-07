@@ -20,7 +20,7 @@ var graph_params = {
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
           nxticks: 11, nyticks: 11, gridline_width:0.05,
-          xtick_offset: 4 },
+          xtick_offset: 7 },
   trace: { color: "steelblue", width: 2.5},
   frame_step: 1
 }
@@ -56,7 +56,7 @@ function NeuronData () {
 
   this.attrs = {
     xmin: -this.T, xmax: 0,
-    ymin: -100e-3, ymax: 50e-3
+    ymin: -84e-3, ymax: 36e-3
   }
 
   this.next = function() {
@@ -140,7 +140,7 @@ function makeXAxis(params, min, max) {
   for (var i = 0; i < params.axis.nxticks; i++) {
     let x = i*step;
     let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
-    let number = new Two.Text(val, x, offset + params.axis.tick_length + 1);
+    let number = new Two.Text(val, x, offset + params.axis.tick_length + 5);
     number.size = 8;
     number.alignment = "center";
     numbers.push(number);
