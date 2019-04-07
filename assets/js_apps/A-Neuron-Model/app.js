@@ -15,7 +15,7 @@ var two = new Two(params).appendTo(elem);
 
 // graph params
 var graph_params = {
-  margin: { left: 25, right: 25, top: 25, bottom: 25 },
+  margin: { left: 50, right: 25, top: 25, bottom: 25 },
   border: { width: 2, radius: 4, offset: 22.5, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
@@ -117,7 +117,7 @@ function makeXAxis(params, min, max) {
   var ticks = [];
   for (var i = 0; i < params.axis.nxticks; i++) {
     let x = i*step;
-    let tick = two.makePath(x, offset, x, offset + params.axis.tick_length);
+    const tick = two.makePath(x, offset, x, offset + params.axis.tick_length);
     tick.stroke = params.axis.color;
     tick.linewidth = params.axis.width;
     ticks.push(tick);
@@ -128,7 +128,7 @@ function makeXAxis(params, min, max) {
   gridlines = [];
   for (var i = 0; i < params.axis.nxticks; i++) {
     let x =  i * step;
-    let gridline = two.makePath(x, -gridline_len, x, 0);
+    const gridline = two.makePath(x, -gridline_len, x, 0);
     gridline.stroke = params.axis.color;
     gridline.linewidth = params.axis.gridline_width;
     gridline.noFill();
@@ -137,15 +137,23 @@ function makeXAxis(params, min, max) {
   xaxis.add(gridlines);
   // numbers
   numbers = [];
-  for (var i = 0; i < params.axis.nxticks; i++) {
+  // start at i=1 to avoid setting number on y axis
+  for (var i = 1; i < params.axis.nxticks; i++) {
     let x = i*step;
     let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
-    let number = new Two.Text(val, x, offset + params.axis.tick_length + 5);
+    const number = new Two.Text(val, x, offset + params.axis.tick_length + 5);
     number.size = 8;
     number.alignment = "center";
     numbers.push(number);
   }
   xaxis.add(numbers);
+  // text label
+  const xlabel = new Two.Text(
+    "time (ms)",
+    axis_len / 2,
+    10);
+  xlabel.size = 12;
+  xaxis.add(xlabel);
   return xaxis;
 }
 
@@ -166,7 +174,7 @@ function makeYAxis(params, min, max) {
   var ticks = [];
   for (var i = 0; i <= params.axis.nyticks; i++) {
     let y = axis_len - i*step;
-    let tick = two.makePath(0, y, -params.axis.tick_length, y);
+    const tick = two.makePath(0, y, -params.axis.tick_length, y);
     tick.stroke = params.axis.color;
     tick.linewidth = params.axis.width;
     ticks.push(tick);
@@ -177,7 +185,7 @@ function makeYAxis(params, min, max) {
   gridlines = [];
   for (var i = 0; i < params.axis.nyticks; i++) {
     let y = axis_len - i * step;
-    let gridline = two.makePath(0, y, gridline_len, y);
+    const gridline = two.makePath(0, y, gridline_len, y);
     gridline.stroke = params.axis.color;
     gridline.linewidth = params.axis.gridline_width;
     gridline.noFill();
@@ -189,12 +197,23 @@ function makeYAxis(params, min, max) {
   for (var i = 0; i < params.axis.nyticks; i++) {
     let y = axis_len - i*step;
     let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
-    let number = new Two.Text(val, -params.axis.tick_length - 1, y);
+    const number = new Two.Text(val, -params.axis.tick_length - 1, y);
     number.size = 8;
     number.alignment = "right";
     numbers.push(number);
   }
   yaxis.add(numbers);
+  // text label
+  const ylabel = new Two.Text(
+    "Membrane Voltage (uV)",
+    -24,
+    axis_len / 2
+    );
+  ylabel.rotation = Math.PI * 3 / 2;;
+  ylabel.size = 12;
+  ylabel.fill = params.trace.color;
+  yaxis.add(ylabel);
+  //
   return yaxis;
 }
 
