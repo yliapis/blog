@@ -7,7 +7,7 @@
 
 // set up two
 var elem = document.getElementById("stage");
-var params = { width: 600, height: 400, type: Two.Types.svg };
+var params = { width: 600, height: 400, type: Two.Types.canvas };
 var two = new Two(params).appendTo(elem);
 
 // graph params
@@ -16,7 +16,7 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11, gridline_width: 10},
+          nxticks: 11, nyticks: 11, gridline_width: .05},
   frame_step: 1
 }
 _.extend(graph_params, params);
@@ -140,8 +140,14 @@ function makeYAxis(params) {
   // gridlines
   let gridline_len = params.width - (params.margin.left + params.margin.right);
   gridlines = []
+  // const gstep = axis_len / (params.axis.nxticks * 10);
   for (var i = 0; i <= params.axis.nyticks; i++) {
     let y = axis_len - i * step;
+    // // hackery to make stuff work...
+    // let anchors = []
+    // for (var pos = 0; pos <= axis_len; pos += gstep)
+    //   anchors.push(Two.Anchor(pos, y));
+    // let gridline = two.makePath(anchors);
     let gridline = two.makePath(0, y, gridline_len, y);
     gridline.stroke = params.axis.color;
     gridline.linewidth = params.axis.gridline_width;
