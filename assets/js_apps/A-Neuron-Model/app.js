@@ -16,7 +16,9 @@ var graph_params = {
   border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
-          nxticks: 11, nyticks: 11, xtick_offset: 4 },
+          nxticks: 11, nyticks: 11, gridline_width:0.05,
+          xtick_offset: 4 },
+  trace: { color: "steelblue", width: 2.5},
   frame_step: 1
 }
 _.extend(graph_params, params);
@@ -86,7 +88,7 @@ function makeBorder(params) {
     params.border.radius);
   border.linewidth = params.border.width;
   border.stroke = params.border.color;
-  border.fill = params.background;
+  // border.fill = params.background;
   return border;
 }
 
@@ -105,6 +107,7 @@ function makeXAxis(params) {
                 other_len / (params.axis.nxticks));
   var axis = two.makePath(0, offset, axis_len, offset);
   axis.stroke = params.axis.color;
+  axis.noFill();
   xaxis.add(axis);
   // create ticks
   const step = axis_len / params.axis.nxticks;
@@ -116,6 +119,18 @@ function makeXAxis(params) {
     tick.linewidth = params.axis.width;
     ticks.push(tick);
   }
+  // gridlines
+  const gridline_len = params.height - (params.margin.top + params.margin.bottom);
+  gridlines = []
+  for (var i = 0; i <= params.axis.nxticks; i++) {
+    let x =  i * step;
+    let gridline = two.makePath(x, -gridline_len, x, 0);
+    gridline.stroke = params.axis.color;
+    gridline.linewidth = params.axis.gridline_width;
+    gridline.noFill();
+    gridlines.push(gridline);
+  }
+  xaxis.add(gridlines);
   xaxis.add(ticks);
   return xaxis;
 }
@@ -142,6 +157,18 @@ function makeYAxis(params) {
     tick.linewidth = params.axis.width;
     ticks.push(tick);
   }
+  // gridlines
+  const gridline_len = params.width - (params.margin.left + params.margin.right);
+  gridlines = []
+  for (var i = 0; i <= params.axis.nyticks; i++) {
+    let y = axis_len - i * step;
+    let gridline = two.makePath(0, y, gridline_len, y);
+    gridline.stroke = params.axis.color;
+    gridline.linewidth = params.axis.gridline_width;
+    gridline.noFill();
+    gridlines.push(gridline);
+  }
+  yaxis.add(gridlines);
   yaxis.add(ticks);
   return yaxis;
 }
@@ -197,9 +224,10 @@ function plotData(stage, data, params) {
     anchors.push(new Two.Anchor(x[i], y[i]));
 
   let path = two.makePath(anchors);
-  path.stroke = "purple";
-  path.linewidth = 1;
+  path.stroke = params.trace.color;
+  path.linewidth = params.trace.width;
   path.closed = false;
+  path.fill = "transparent";
   stage.add(path);
   stage.trace = path;
 }
