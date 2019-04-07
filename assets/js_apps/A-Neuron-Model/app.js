@@ -3,7 +3,10 @@
  * libraryas a learning experience building everything
  * from the ground up, and because I am not a fan of 
  * its API (especially for animations)
- */
+ *
+ * And yes, this code needs refactoring (I have been using
+ * javascript for just a week now)
+ */ 
 
 // set up two
 var elem = document.getElementById("stage");
@@ -13,7 +16,7 @@ var two = new Two(params).appendTo(elem);
 // graph params
 var graph_params = {
   margin: { left: 25, right: 25, top: 25, bottom: 25 },
-  border: { width: 2, radius: 4, offset: 20, color: "lightgray" },
+  border: { width: 2, radius: 4, offset: 22.5, color: "lightgray" },
   background: "white",
   axis: { color: "black", width: 0.5, tick_length: 5,
           nxticks: 11, nyticks: 11, gridline_width:0.05,
@@ -22,6 +25,7 @@ var graph_params = {
   frame_step: 1
 }
 _.extend(graph_params, params);
+
 
 // neurom data constructor
 function NeuronData () {
@@ -60,7 +64,6 @@ function NeuronData () {
     // Leaky integrate and fire
     if (this.model === "LIR") {
       let I = (function () { return self.I })();
-      debugger;
       if (vm > this.vt)
         return this.vreset;
       else
@@ -70,21 +73,21 @@ function NeuronData () {
   }
 
   this.step = function () {
-    // Izhikevich
     let next = this.next();
     this.data.shift();
     this.data.push(next);
   }
 }
 
+
 // helper functions
 function makeBorder(params) {
   var border = two.makeRoundedRectangle(
     params.width/2, params.height/2,
     params.width + params.border.offset -
-      (params.margin.left + params.margin.right),
+      (params.margin.left + params.margin.right) / 2,
     params.height + params.border.offset -
-      (params.margin.top + params.margin.bottom),
+      (params.margin.top + params.margin.bottom) / 2,
     params.border.radius);
   border.linewidth = params.border.width;
   border.stroke = params.border.color;
@@ -93,7 +96,7 @@ function makeBorder(params) {
 }
 
 
-function makeXAxis(params) {
+function makeXAxis(params, min, max) {
   // make line
   var xaxis = two.makeGroup();
   const axis_len = params.width - (params.margin.left + params.margin.right);
@@ -111,7 +114,7 @@ function makeXAxis(params) {
   xaxis.add(axis);
   // create ticks
   const step = axis_len / params.axis.nxticks;
-  var ticks = []
+  var ticks = [];
   for (var i = 0; i <= params.axis.nxticks; i++) {
     let x = i*step;
     let tick = two.makePath(x, offset, x, offset + params.axis.tick_length);
@@ -119,9 +122,10 @@ function makeXAxis(params) {
     tick.linewidth = params.axis.width;
     ticks.push(tick);
   }
+  xaxis.add(ticks);
   // gridlines
   const gridline_len = params.height - (params.margin.top + params.margin.bottom);
-  gridlines = []
+  gridlines = [];
   for (var i = 0; i <= params.axis.nxticks; i++) {
     let x =  i * step;
     let gridline = two.makePath(x, -gridline_len, x, 0);
@@ -131,12 +135,11 @@ function makeXAxis(params) {
     gridlines.push(gridline);
   }
   xaxis.add(gridlines);
-  xaxis.add(ticks);
   return xaxis;
 }
 
 
-function makeYAxis(params) {
+function makeYAxis(params, min, max) {
   // make line
   var yaxis = two.makeGroup();
   const axis_len = params.height - (params.margin.top + params.margin.bottom);
@@ -149,7 +152,7 @@ function makeYAxis(params) {
   yaxis.add(axis);
   // create ticks
   const step = axis_len / params.axis.nyticks;
-  var ticks = []
+  var ticks = [];
   for (var i = 0; i <= params.axis.nyticks; i++) {
     let y = axis_len - i*step;
     let tick = two.makePath(0, y, -params.axis.tick_length, y);
@@ -157,9 +160,10 @@ function makeYAxis(params) {
     tick.linewidth = params.axis.width;
     ticks.push(tick);
   }
+  yaxis.add(ticks);
   // gridlines
   const gridline_len = params.width - (params.margin.left + params.margin.right);
-  gridlines = []
+  gridlines = [];
   for (var i = 0; i <= params.axis.nyticks; i++) {
     let y = axis_len - i * step;
     let gridline = two.makePath(0, y, gridline_len, y);
@@ -169,9 +173,20 @@ function makeYAxis(params) {
     gridlines.push(gridline);
   }
   yaxis.add(gridlines);
-  yaxis.add(ticks);
+  // numbers
+  numbers = [];
+  for (var i = 0; i <= params.axis.nyticks; i++) {
+    let y = axis_len - i*step;
+    let val = String(min + i * (max - min) / (params.axis.nyticks - 1));
+    let number = new Two.Text(val, -params.axis.tick_length - 1, y);
+    number.size = 8;
+    number.alignment = "right";
+    numbers.push(number);
+  }
+  yaxis.add(numbers);
   return yaxis;
 }
+
 
 function makeStage(params) {
   stage = two.makeGroup();
@@ -215,7 +230,7 @@ function plotData(stage, data, params) {
     return stage.attrs.scale.height * ((y - data.attrs.ymin) /
             (data.attrs.ymax - data.attrs.ymin));
   }
-  // debugger;
+
   let x = data.time.map(mapx);
   let y = data.data.map(mapy);
 
@@ -232,23 +247,29 @@ function plotData(stage, data, params) {
   stage.trace = path;
 }
 
+
 // graph construction
 function NeuronGraph(params) {
 
   let self = this;
+
+  // make data
+  this.neuron_data = new NeuronData();
 
   // create border
   this.border = makeBorder(params);
 
   // generate axis
   this.axis = {
-    xaxis: makeXAxis(params),
-    yaxis: makeYAxis(params)
+    xaxis: makeXAxis(params,
+                     self.neuron_data.attrs.xmin * 1e3,
+                     self.neuron_data.attrs.xmax * 1e3),
+    yaxis: makeYAxis(params,
+                     self.neuron_data.attrs.ymin * 1e3,
+                     self.neuron_data.attrs.ymax * 1e3)
   };
 
   this.stage = makeStage(params);
-
-  this.neuron_data = new NeuronData();
 
   plotData(this.stage, this.neuron_data, params);
 
@@ -268,11 +289,14 @@ function NeuronGraph(params) {
 
 }
 
-// components
+
+// make graph
 var graph = new NeuronGraph(graph_params);
 graph.play();
 
+
 // input callbacks
+
 // current
 var current_slider = document.getElementById("I");
 graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
@@ -298,8 +322,4 @@ play_button.onclick = function() {
     play_img.src = pause_img_src;
   }
   play = !play;
-}
-
-function pause() {
-  graph.pause();
 }
