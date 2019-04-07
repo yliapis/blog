@@ -7,7 +7,7 @@
 
 // set up two
 var elem = document.getElementById("stage");
-var params = { width: 600, height: 400, type: Two.Types.canvas };
+var params = { width: 600, height: 400, type: Two.Types.svg };
 var two = new Two(params).appendTo(elem);
 
 // graph params

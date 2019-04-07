@@ -24,9 +24,9 @@ Cool graph, though
                width:50px;
                top:10px;
                left:100px;" -->
-      <img id="play_symbol" src="/assets/media/images/play-button.svg" height="16" width="16"/>
+      <img id="play_symbol" src="/assets/media/images/play.svg" height="16" width="16"/>
       </button>
-      <input type="range" min="1" max="100" value="12" id="I"
+      <input type="range" min="1" max="50" value="12" id="I"
         style="height=20px;
                width:500px;
                -webkit-appearance:none;
