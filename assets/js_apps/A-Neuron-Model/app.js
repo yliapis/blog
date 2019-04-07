@@ -26,25 +26,25 @@ function NeuronData () {
 
   this.num_excitory = 64;
   this.num_inhibitory = 64;
-  this.p_fire_e = 0.2;
-  this.p_fire_i = 0.2;
-
-  this.dt = 200e-6;
+  this.p_fire_e = 0.5;
+  this.p_fire_i = 0.05;
 
   this.vt = -30e-3;
   this.ve = -75e-3
   this.vreset = -80e-3;
 
   this.taum = 10e-3;
-  this.Rm = 10e-6;
-  this.Iscale = 50e-9;
+  this.Rm = 10e6;
+  this.Iscale = 10e-9 / this.num_excitory;
 
   this.T = 500e-3;
   this.n_points = 256;
   this.dt = this.T / (this.n_points - 1);
+
   this.data = new Array(this.n_points);
   for (var i = 0; i < this.n_points; i++)
     this.data[i] = this.vreset;
+  
   this.time = new Array(this.n_points);
   for (var i = 0; i < this.n_points; i++)
     this.time[i] = this.dt * i - this.T;
@@ -57,9 +57,9 @@ function NeuronData () {
   this.inputs = function () {
     let e = 0, i = 0;
     for (var n = 0; n < this.num_excitory; n++)
-      e += (Math.rand() < p_fire_e);
+      e += (Math.random() < this.p_fire_e);
     for (var n = 0; n < this.num_inhibitory; n++)
-      i += (Math.rand() < p_fire_i);
+      i += (Math.random() < this.p_fire_i);
     return {
       excitory: e,
       inhibitory: i,
@@ -74,16 +74,15 @@ function NeuronData () {
     else
       return (vm + this.dt * (
         -(vm - this.ve) +
-        (this.inputs * this.Iscale) * this.Rm) / 
+        (this.inputs().total * this.Iscale) * this.Rm) / 
         this.taum);
   }
 
   this.step = function () {
     // Izhikevich
-      let next = this.next();
-      this.data.shift();
-      this.data.push(next);
-
+    let next = this.next();
+    this.data.shift();
+    this.data.push(next);
   }
 }
 
@@ -185,19 +184,17 @@ function plotData(stage, data, params) {
 
   function mapx(x) {
     // return (Math.random() * stage.attrs.scale.width);
-    return stage.attrs.scale.width * (0.5 - x *
+    return stage.attrs.scale.width * ((x - data.attrs.xmin) /
             (data.attrs.xmax - data.attrs.xmin));
   }
   
   function mapy(y) {
     // return (stage.attrs.scale.height - Math.random() * stage.attrs.scale.height);
-     return stage.attrs.scale.height * (y / (data.attrs.ymax - data.attrs.ymin));
+    return stage.attrs.scale.height * (1 - (y - data.attrs.ymin) /
+            (data.attrs.ymax - data.attrs.ymin));
   }
-
-  let x = data.time;
-  for (var i = 0; i < x.length; i++)
-    x[i] = mapx(x[i]);
-
+  // debugger;
+  let x = data.time.map(mapx);
   let y = data.data.map(mapy);
 
   var anchors = []
@@ -235,7 +232,9 @@ function NeuronGraph(params) {
   two.bind("update", function(frameCount) {
     if (!(frameCount % params.frame_step)) {
       self.stage.trace.remove();
+      self.neuron_data.step();
       plotData(self.stage, self.neuron_data, params);
+      // console.log("update");
     }
   });
 
@@ -248,7 +247,7 @@ function NeuronGraph(params) {
 
 
 var graph = new NeuronGraph(graph_params);
-two.update();
-// graph.play();
+// two.update();
+graph.play();
 
 console.log("run 5");
