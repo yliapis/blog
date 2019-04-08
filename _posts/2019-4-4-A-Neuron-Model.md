@@ -7,7 +7,7 @@ category: posts
 
 <html>
   <link rel="stylesheet" type="text/css" href="/assets/css/io.css">
-  <base href="/assets/js_apps/A-Neuron-Model/"/>
+  <base href="/assets/apps/A-Neuron-Model/"/>
   <head></head>
   <body>
     <div id="stage" padding="0 px"></div>
