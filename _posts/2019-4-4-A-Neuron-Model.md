@@ -16,19 +16,10 @@ category: posts
         padding:0;
         border:none;
         background:none;">
-<!--       style="height:25px;
-               width:50px;
-               top:10px;
-               left:100px;" -->
       <img id="play_symbol" src="/assets/media/images/play.svg" height="16" width="16"/>
       </button>
-      <input type="range" min="0" max="35" value="12" id="I"
-        style="height=16px;
-               width:500px;
-               -webkit-appearance:none;
-               border:none;
-               background:none;
-               "/>
+      <input type="range" min="0" max="35000" value="12000" id="I"
+        style="height=16px;width:500px;"/>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/3.3.0/math.min.js"></script>
     <script src="/assets/js_libs/lodash.js"></script>

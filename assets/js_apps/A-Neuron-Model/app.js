@@ -366,10 +366,10 @@ graph.play();
 
 // current
 var current_slider = document.getElementById("I");
-graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
+graph.neuron_data.I = (Number(current_slider.value) * 1e-12);
 
 current_slider.oninput = function() {
-  graph.neuron_data.I = (Number(current_slider.value) * 1e-9);
+  graph.neuron_data.I = (Number(current_slider.value) * 1e-12);
 }
 
 // play
