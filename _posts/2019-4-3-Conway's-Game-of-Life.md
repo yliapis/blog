@@ -4,7 +4,7 @@ category: posts
 ---
 
 <html>
-  <base href="/assets/js_apps/Conway's-Game-of-Life/"/>
+  <base href="/assets/apps/Conway's-Game-of-Life/"/>
   <head></head>
   <body>
     <div id="stage" padding="0 px"></div>
