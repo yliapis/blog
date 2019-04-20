@@ -54,7 +54,7 @@ author_profile: true
 * [SourceTree](https://www.sourcetreeapp.com/): Powerful git GUI.
 * [Sublime Text](https://www.sublimetext.com/): Minimal and highly customizable code editor.
 * [Sublime Merge](https://www.sublimemerge.com/): Git for sublime, similar to SourceTree.
-* [Atom](https://atom.io/): Another solid code editor, with built in git integration. Speaking of git, this one is made by GitHub.
+* [Atom](https://atom.io/): Another solid code editor, with built in git integration. Speaking of git, this one is made by GitHub. Contains many advanced git features, such as visual merge conflict resolution. If you are a heavy git user, this is a great one to go with.
 * [ITerm](https://iterm2.com/): Great terminal emulator for mac.
 * [Hyper](https://hyper.is/): Another great terminal emulator; this one is cross-platform (and also very pretty).
 * [Slack](https://slack.com/pricing): Great communication tool for collaboration.
