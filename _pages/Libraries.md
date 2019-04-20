@@ -1,0 +1,47 @@
+---
+permalink: /libraries/
+
+# title: Libraries
+
+type: pages
+
+layout: single
+sidebar:
+
+header:
+  image: /assets/media/heartbeat.jpg
+
+author_profile: true
+---
+
+## A curated list of useful programming libraries
+
+### Python
+* [The python standard library](https://docs.python.org/3/library/index.html)
+* Computational and Data Science
+  - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
+  - [Numpy](https://www.numpy.org/) This one is vital; A n-dimensional array (tensor) manipulation library. Super fast since the backend is primarily written in C. Reminiscent of MATLAB.
+  - [OpenCV](https://docs.opencv.org/3.0-beta/index.html) Image processing library written in C++. Has a python wrapper.
+  - [Pandas](https://pandas.pydata.org/) Data table manipulation library.
+  - [PyTorch](https://pytorch.org/) A very powerful deep learning library.
+  - [PyWavelets](https://pywavelets.readthedocs.io/en/latest/) Extensive Wavelet library for python.
+  - [Scikit-Image](https://scikit-image.org/) Solid image processing library.
+  - [Scikit-Learn](https://scikit-learn.org/stable/) The go-to library for most machine learning techniques.
+  - [Scipy](https://docs.scipy.org/doc/scipy/reference/) Many common scientific functions and algorithms, such as special functions, integration, optimization, statistics, signal processing, etc.
+  - [StatsModels](https://www.statsmodels.org/stable/index.html) Statistics library with many esoteric models and techniques. Still in the earlier stages of development.
+* Visualization
+  - [Matplotlib](https://matplotlib.org/) The primary plotting library used in python. Very similar API to MATLAB plotting.
+  - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
+  - [Plotly](https://plot.ly/python/) Beautiful interactive visualization generation. Some features are not free.
+  - [Seaborn](https://seaborn.pydata.org/) Another good statistical data visualization library.
+
+### JavaScript
+* Data Visualization
+  - [D3](https://d3js.org/) Very powerful interactive data visualization library.
+* Drawing and Animation
+  - [two.js](https://two.js.org/) Easy to use 2D drawing and animation library
+
+<br>
+<br>
+
+Last updated: April 2019

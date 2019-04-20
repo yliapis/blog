@@ -32,6 +32,10 @@ author_profile: true
 * [stack overflow](https://stackoverflow.com/): If you program, you have found yourself here more than once; a forum for asking questions to programming problems. Careful when looking at answers; many are incorrect.
 * [Google](https://google.com): For anything you can't find on stack overflow.
 
+### Libraries
+
+* [Link](/libraries/): All of my favorite libraries.
+
 ### Blogs
 
 * [Towards Data Science](https://towardsdatascience.com/): Lots of good posts here (and a lot of amateur posts too; be careful)
