@@ -12,7 +12,7 @@ layouts_gallery:
   - url: /assets/images/mm-layout-archive.png
     image_path: /assets/images/mm-layout-archive.png
     alt: "archive layout example"
-last_modified_at: 2017-11-06T16:27:14-05:00
+last_modified_at: 2019-04-03T15:15:09-04:00
 toc: true
 ---
 
@@ -20,7 +20,7 @@ Minimal Mistakes is a flexible two-column Jekyll theme. Perfect for hosting your
 
 {% include gallery id="layouts_gallery" caption="Examples of included layouts `splash`, `single`, and `archive`." %}
 
-[Install the Theme]({{ "/docs/quick-start-guide/" | absolute_url }}){: .btn .btn--success .btn--large}
+[Install the Theme]({{ "/docs/quick-start-guide/" | relative_url }}){: .btn .btn--success .btn--large}
 
 ## Notable Features
 
@@ -31,9 +31,9 @@ Minimal Mistakes is a flexible two-column Jekyll theme. Perfect for hosting your
 - Several responsive layout options (single, archive index, search, splash, and paginated home page).
 - Optimized for search engines with support for [Twitter Cards](https://dev.twitter.com/cards/overview) and [Open Graph](http://ogp.me/) data
 - Optional [header images](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#headers), [custom sidebars](https://mmistakes.github.io/minimal-mistakes/docs/layouts/#sidebars), [table of contents](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#table-of-contents), [galleries](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#gallery), related posts, [breadcrumb links](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#breadcrumb-navigation-beta), [navigation lists](https://mmistakes.github.io/minimal-mistakes/docs/helpers/#navigation-list), and more.
-- Commenting support (powered by [Disqus](https://disqus.com/), [Facebook](https://developers.facebook.com/docs/plugins/comments), Google+, [Discourse](https://www.discourse.org/), static-based via [Staticman v1 and v2](https://staticman.net/), and custom).
+- Commenting support (powered by [Disqus](https://disqus.com/), [Facebook](https://developers.facebook.com/docs/plugins/comments), [Discourse](https://www.discourse.org/), [utterances](https://utteranc.es/), static-based via [Staticman v1 and v2](https://staticman.net/), and custom).
 - [Google Analytics](https://www.google.com/analytics/) support.
-- UI localized text in English (default), Brazilian Portuguese (Português brasileiro), Chinese, Danish, Dutch, French (Français), German (Deutsch), Greek, Indonesian, Italian (Italiano), Korean, Nepali (Nepalese), Polish, Russian, Spanish (Español), Swedish, Turkish (Türkçe), and Vietnamese.
+- UI localized text in English (default), Brazilian Portuguese (Português brasileiro), Chinese, Danish, Dutch, French (Français), German (Deutsch), Greek, Hindi (हिंदी), Hungarian, Indonesian, Italian (Italiano), Japanese, Korean, Malayalam, Nepali (Nepalese), Persian (فارسی), Polish, Punjabi (ਪੰਜਾਬੀ), Romanian, Russian, Slovak, Spanish (Español), Swedish, Thai, Turkish (Türkçe), and Vietnamese.
 
 ## Demo Pages
 
@@ -49,14 +49,14 @@ Minimal Mistakes is a flexible two-column Jekyll theme. Perfect for hosting your
 
 For even more demo pages check the [posts archive][year-archive].
 
-[header-image-post]: {{ "" | absolute_url }}{% post_url 2012-03-15-layout-header-image-text-readability %}
-[gallery-post]: {{ "" | absolute_url }}{% post_url 2010-09-09-post-gallery %}
-[html-tags-post]: {{ "" | absolute_url }}{% post_url 2013-01-11-markup-html-tags-and-formatting %}
-[syntax-post]: {{ "" | absolute_url }}{% post_url 2013-08-16-markup-syntax-highlighting %}
-[sample-collection]: {{ "/recipes/chocolate-chip-cookies/" | absolute_url }}
-[categories-archive]: {{ "/categories/" | absolute_url }}
-[tags-archive]: {{ "/tags/" | absolute_url }}
-[year-archive]: {{ "/year-archive/" | absolute_url }}
+[header-image-post]: {{ "" | relative_url }}{% post_url 2012-03-15-layout-header-image-text-readability %}
+[gallery-post]: {{ "" | relative_url }}{% post_url 2010-09-09-post-gallery %}
+[html-tags-post]: {{ "" | relative_url }}{% post_url 2013-01-11-markup-html-tags-and-formatting %}
+[syntax-post]: {{ "" | relative_url }}{% post_url 2013-08-16-markup-syntax-highlighting %}
+[sample-collection]: {{ "/recipes/chocolate-chip-cookies/" | relative_url }}
+[categories-archive]: {{ "/categories/" | relative_url }}
+[tags-archive]: {{ "/tags/" | relative_url }}
+[year-archive]: {{ "/year-archive/" | relative_url }}
 
 ---
 
@@ -78,6 +78,7 @@ For even more demo pages check the [posts archive][year-archive].
 - [FitVids.JS](http://fitvidsjs.com/)
 - Greedy Navigation - [lukejacksonn](https://codepen.io/lukejacksonn/pen/PwmwWV)
 - [jQuery Smooth Scroll](https://github.com/kswedberg/jquery-smooth-scroll)
+- [Lunr](http://lunrjs.com)
 
 ---
 

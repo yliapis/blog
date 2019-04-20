@@ -2,67 +2,84 @@
 title: "Quick-Start Guide"
 permalink: /docs/quick-start-guide/
 excerpt: "How to quickly install and setup Minimal Mistakes for use with GitHub Pages."
-last_modified_at: 2017-11-15T09:49:52-05:00
+last_modified_at: 2019-04-18T15:53:52-04:00
 redirect_from:
   - /theme-setup/
 toc: true
 ---
 
-Minimal Mistakes has been developed as a [Jekyll theme gem](http://jekyllrb.com/docs/themes/) for easier use. It is also 100% compatible with GitHub Pages --- just with slightly different installation process.
+Minimal Mistakes has been developed as a [Gem-based theme](http://jekyllrb.com/docs/themes/) for easier use, and 100% compatible with GitHub Pages when used as a remote theme.
 
-## Installing the Theme
+**If you enjoy this theme, please consider [supporting me](https://www.paypal.me/mmistakes) for developing and maintaining it.**
+
+[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/mmistakes)
+
+## Installing the theme
 
 If you're running Jekyll v3.5+ and self-hosting you can quickly install the theme as a Ruby gem.
 
-[^structure]: See [**Structure** page]({{ "/docs/structure/" | absolute_url }}) for a list of theme files and what they do.
+[^structure]: See [**Structure** page]({{ "/docs/structure/" | relative_url }}) for a list of theme files and what they do.
 
 **ProTip:** Be sure to remove `/docs` and `/test` if you forked Minimal Mistakes. These folders contain documentation and test pages for the theme and you probably don't want them littering up your repo.
 {: .notice--info}
 
-### Ruby Gem Method
-
-Add this line to your Jekyll site's `Gemfile`:
-
-```ruby
-gem "minimal-mistakes-jekyll"
-```
-
-Add this line to your Jekyll site's `_config.yml` file:
-
-```yaml
-theme: minimal-mistakes-jekyll
-```
-
-Then run Bundler to install the theme gem and dependencies:
-
-```bash
-bundle install
-```
-
-### GitHub Pages Compatible Methods
-
-If you're hosting with GitHub Pages follow these steps instead.
-
-**Note:** [jekyll-remote-theme](https://github.com/benbalter/jekyll-remote-theme) is currently in beta on GitHub Pages. In my tests it works as advertised, with the occasional failure due to missing `_includes` and `_layouts` --- your results may vary.
+**Note:** The theme uses the [jekyll-include-cache](https://github.com/benbalter/jekyll-include-cache) plugin which will need to be installed in your `Gemfile` and added to the `plugins` array of `_config.yml`. Otherwise you'll throw `Unknown tag 'include_cached'` errors at build.
 {: .notice--warning}
 
-Replace `gem "jekyll"` with:
+### Gem-based method
 
-```
-gem "github-pages", group: :jekyll_plugins
-gem "jekyll-remote-theme"
-```
+With Gem-based themes, directories such as the `assets`, `_layouts`, `_includes`, and `_sass` are stored in the theme’s gem, hidden from your immediate view. This allows for easier installation and updating as you don't have to manage any of the theme files. 
 
-Run `bundle update` and verify that all gems install properly.
+To install as a Gem-based theme:
 
-Add `remote_theme: "mmistakes/minimal-mistakes"` to your `_config.yml` file.
+1. Add the following to your `Gemfile`:
 
-Then add [`jekyll-remote-theme`](https://github.com/benbalter/jekyll-remote-theme) to the `plugins` (previously gems) array in your `_config.yml` file like so:
+   ```ruby
+   gem "minimal-mistakes-jekyll"
+   ```
 
-```
-plugins:
-  - jekyll-remote-theme
-```
+2. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
+
+   ```bash
+   bundle
+   ```
+
+3. Set the `theme` in your project's Jekyll `_config.yml` file:
+
+   ```yaml
+   theme: minimal-mistakes-jekyll
+   ```
+
+To update the theme run `bundle update`.
+
+### Remote theme method
+
+Remote themes are similar to Gem-based themes, but do not require `Gemfile` changes or whitelisting making them ideal for sites hosted with GitHub Pages.
+
+To install as a remote theme:
+
+1. Create/replace the contents of your `Gemfile` with the following:
+
+   ```ruby
+   source "https://rubygems.org"
+
+   gem "github-pages", group: :jekyll_plugins
+   ```
+
+2. Add `jekyll-include-cache` to the `plugins` array of your `_config.yml`.
+
+3. Fetch and update bundled gems by running the following [Bundler](http://bundler.io/) command:
+
+   ```bash
+   bundle
+   ```
+
+4. Add `remote_theme: "mmistakes/minimal-mistakes@4.16.0"` to your `_config.yml` file. Remove any other `theme:` or `remote_theme:` entry.
+
+You may also optionally specify a branch, [tag](https://github.com/mmistakes/minimal-mistakes/tags), or commit to use by appending an @ and the Git ref (e.g., `mmistakes/minimal-mistakes@4.9.0` or `mmistakes/minimal-mistakes@bbf3cbc5fd64a3e1885f3f99eb90ba92af84063d`). This is useful when rolling back to older versions of the theme. If you don't specify a Git ref, the latest on `master` will be used.
+
+**Looking for an example?** Fork the [Minimal Mistakes remote theme starter](https://github.com/mmistakes/mm-github-pages-starter) for the quickest method of getting a GitHub Pages hosted site up and running. Replace sample content with your own and configure as needed.
+{: .notice--info}
 
 ---
 
@@ -72,7 +89,7 @@ plugins:
 If you're hosting several Jekyll based sites under the same GitHub username you will have to use Project Pages instead of User Pages. Essentially you rename the repo to something other than **USERNAME.github.io** and create a `gh-pages` branch off of `master`. For more details on how to set things up check [GitHub's documentation](https://help.github.com/articles/user-organization-and-project-pages/).
 
 <figure>
-  <img src="{{ '/assets/images/mm-gh-pages.gif' | absolute_url }}" alt="creating a new branch on GitHub">
+  <img src="{{ '/assets/images/mm-gh-pages.gif' | relative_url }}" alt="creating a new branch on GitHub">
 </figure>
 
 You can also install the theme by copying all of the theme files[^structure] into your project.
@@ -80,10 +97,10 @@ You can also install the theme by copying all of the theme files[^structure] int
 To do so fork the [Minimal Mistakes theme](https://github.com/mmistakes/minimal-mistakes/fork), then rename the repo to **USERNAME.github.io** --- replacing **USERNAME** with your GitHub username.
 
 <figure>
-  <img src="{{ '/assets/images/mm-theme-fork-repo.png' | absolute_url }}" alt="fork Minimal Mistakes">
+  <img src="{{ '/assets/images/mm-theme-fork-repo.png' | relative_url }}" alt="fork Minimal Mistakes">
 </figure>
 
-**GitHub Pages Alternatives:** Looking to host your site for free and install/update the theme painlessly? [Netflify][netlify-jekyll], [GitLab Pages][gitlab-jekyll], and [Continuous Integration (CI) services][ci-jekyll] have you covered. In most cases all you need to do is connect your repository to them, create a simple configuration file, and install the theme following the [Ruby Gem Method](#ruby-gem-method) above.
+**GitHub Pages Alternatives:** Looking to host your site for free and install/update the theme painlessly? [Netlify][netlify-jekyll], [GitLab Pages][gitlab-jekyll], and [Continuous Integration (CI) services][ci-jekyll] have you covered. In most cases all you need to do is connect your repository to them, create a simple configuration file, and install the theme following the [Ruby Gem Method](#ruby-gem-method) above.
 {: .notice--info}
 
 [netlify-jekyll]: https://www.netlify.com/blog/2015/10/28/a-step-by-step-guide-jekyll-3.0-on-netlify/
@@ -105,6 +122,9 @@ If you forked or downloaded the `minimal-mistakes-jekyll` repo you can safely re
 - `screenshot-layouts.png`
 - `screenshot.png`
 
+**Note:** If forking the theme be sure to update `Gemfile` as well. The one found at the root of the project is for building the theme's Ruby gem and is missing dependencies. To properly setup a [`Gemfile`](https://github.com/mmistakes/minimal-mistakes/blob/master/docs/Gemfile) with the theme, consult the "[Install Dependencies](https://mmistakes.github.io/minimal-mistakes/docs/installation/#install-dependencies)" section.
+{: .notice--warning}
+
 ## Setup Your Site
 
 Depending on the path you took installing Minimal Mistakes you'll setup things a little differently.
@@ -114,15 +134,15 @@ Depending on the path you took installing Minimal Mistakes you'll setup things a
 
 ### Starting Fresh
 
-Starting with an empty folder and `Gemfile` you'll need to copy or re-create this [default `_config.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_config.yml) file. For a full explanation of every setting be sure to read the [**Configuration**]({{ "/docs/configuration/" | absolute_url }}) section.
+Starting with an empty folder and `Gemfile` you'll need to copy or re-create this [default `_config.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_config.yml) file. For a full explanation of every setting be sure to read the [**Configuration**]({{ "/docs/configuration/" | relative_url }}) section.
 
 From `v4.5.0` onwards, Minimal Mistakes theme-gem comes bundled with the necessary data files and will automatically use them via the [`jekyll-data`](https://github.com/ashmaroli/jekyll-data) plugin. So you no longer need to maintain a copy of these data files at your project directory.
 
 However like all other bundled files, you'll need to create and edit these data files to customize them.
 The bundled data files are:
 
-- [`_data/ui-text.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml) - UI text [documentation]({{ "/docs/ui-text/" | absolute_url }})
-- [`_data/navigation.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml) - navigation [documentation]({{ "/docs/navigation/" | absolute_url }})
+- [`_data/ui-text.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/ui-text.yml) - UI text [documentation]({{ "/docs/ui-text/" | relative_url }})
+- [`_data/navigation.yml`](https://github.com/mmistakes/minimal-mistakes/blob/master/_data/navigation.yml) - navigation [documentation]({{ "/docs/navigation/" | relative_url }})
 
 ### Starting from `jekyll new`
 
@@ -130,7 +150,7 @@ Scaffolding out a site with the `jekyll new` command requires you to modify a fe
 
 Edit `_config.yml`. Then:
 
-- Replace `<site root>/index.md` with a modified [Minimal Mistakes `index.html`](https://github.com/mmistakes/minimal-mistakes/blob/master/index.html). Be sure to enable pagination if using the [`home` layout]({{ "/docs/layouts/#home-page" | absolute_url }}) by adding the necessary lines to **_config.yml**.
+- Replace `<site root>/index.md` with a modified [Minimal Mistakes `index.html`](https://github.com/mmistakes/minimal-mistakes/blob/master/index.html). Be sure to enable pagination if using the [`home` layout]({{ "/docs/layouts/#home-page" | relative_url }}) by adding the necessary lines to **_config.yml**.
 - Change `layout: post` in `_posts/0000-00-00-welcome-to-jekyll.markdown` to `layout: single`.
 - Remove `about.md`, or at the very least change `layout: page` to `layout: single` and remove references to `icon-github.html` (or [copy to your `_includes`](https://github.com/jekyll/minima/tree/master/_includes) if using it).
 
@@ -183,7 +203,7 @@ gem "minimal-mistakes-jekyll"
 
 Then run `bundle update` and add `theme: minimal-mistakes-jekyll` to your `_config.yml`.
 
-**v4 Breaking Change:** Paths for image headers, overlays, teasers, [galleries]({{ "/docs/helpers/#gallery" | absolute_url }}), and [feature rows]({{ "/docs/helpers/#feature-row" | absolute_url }}) have changed and now require a full path. Instead of just `image: filename.jpg` you'll need to use the full path eg: `image: /assets/images/filename.jpg`. The preferred location is now `/assets/images/` but can be placed elsewhere or externally hosted. This applies to image references in `_config.yml` and `author.yml` as well.
+**v4 Breaking Change:** Paths for image headers, overlays, teasers, [galleries]({{ "/docs/helpers/#gallery" | relative_url }}), and [feature rows]({{ "/docs/helpers/#feature-row" | relative_url }}) have changed and now require a full path. Instead of just `image: filename.jpg` you'll need to use the full path eg: `image: /assets/images/filename.jpg`. The preferred location is now `/assets/images/` but can be placed elsewhere or externally hosted. This applies to image references in `_config.yml` and `author.yml` as well.
 {: .notice--danger}
 
 ---
