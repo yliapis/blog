@@ -84,8 +84,8 @@ analytics:
 # Site Author
 author:
   name             : "Yannis Liapis"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "Data Scientist"
+  # avatar           : "/assets/media/images/Yannis_Liapis.jpg"
+  bio              : "Data Scientist & Software Developer"
   location         : "Austin, TX, USA"
   email            :
   uri              :
@@ -251,13 +251,11 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments: false # true
       share: true
       related: true
 
-### YANNI
 header:
   image: /heartbeat.jpg
 
 search: true
-### END YANNI
