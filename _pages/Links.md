@@ -32,10 +32,6 @@ author_profile: true
 * [stack overflow](https://stackoverflow.com/): If you program, you have found yourself here more than once; a forum for asking questions to programming problems. Careful when looking at answers; many are incorrect.
 * [Google](https://google.com): For anything you can't find on stack overflow.
 
-### Libraries
-
-* [Link](/libraries/): All of my favorite libraries and language specific tools.
-
 ### Blogs
 
 * [Towards Data Science](https://towardsdatascience.com/): Lots of good posts here (and a lot of amateur posts too; be careful)
@@ -59,6 +55,10 @@ author_profile: true
 * [Hyper](https://hyper.is/): Another great terminal emulator; this one is cross-platform (and also very pretty).
 * [Slack](https://slack.com/pricing): Great communication tool for collaboration.
 * [Tad](https://www.tadviewer.com/): A viewer for tabular data. Still under development, currently only supports file viewing.
+
+### Libraries
+
+* [Link](/libraries/): All of my favorite libraries and language specific tools.
 
 <br>
 <br>
