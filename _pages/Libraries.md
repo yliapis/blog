@@ -32,6 +32,7 @@ author_profile: true
   - [Scipy](https://docs.scipy.org/doc/scipy/reference/) Many common scientific functions and algorithms, such as special functions, integration, optimization, statistics, signal processing, etc.
   - [StatsModels](https://www.statsmodels.org/stable/index.html) Statistics library with many esoteric models and techniques. Still in the earlier stages of development.
   - [TensorFlow](https://www.tensorflow.org/) Scalable neural network library.
+  - [xarray](http://xarray.pydata.org/en/stable/index.html) N-D labeled arrays and datasets in Python. Somewhat of a multidimensional analog to Pandas.
 * Visualization
   - [Matplotlib](https://matplotlib.org/) The primary plotting library used in python. Very similar API to MATLAB plotting.
   - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
