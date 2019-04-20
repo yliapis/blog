@@ -30,6 +30,7 @@ author_profile: true
   - [Scikit-Learn](https://scikit-learn.org/stable/) The go-to library for most machine learning techniques.
   - [Scipy](https://docs.scipy.org/doc/scipy/reference/) Many common scientific functions and algorithms, such as special functions, integration, optimization, statistics, signal processing, etc.
   - [StatsModels](https://www.statsmodels.org/stable/index.html) Statistics library with many esoteric models and techniques. Still in the earlier stages of development.
+  - [TensorFlow](https://www.tensorflow.org/) Scalable neural network library.
 * Visualization
   - [Matplotlib](https://matplotlib.org/) The primary plotting library used in python. Very similar API to MATLAB plotting.
   - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
