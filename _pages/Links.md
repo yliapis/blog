@@ -34,7 +34,7 @@ author_profile: true
 
 ### Libraries
 
-* [Link](/libraries/): All of my favorite libraries.
+* [Link](/libraries/): All of my favorite libraries and language specific tools.
 
 ### Blogs
 
