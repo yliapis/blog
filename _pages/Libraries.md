@@ -46,6 +46,7 @@ author_profile: true
 * [nodejs](https://nodejs.org/en/about/): Powerful javascript runtime.
 * [eslint](https://eslint.org/): Extensively customizable linter for javascript.
 * [Prettier](https://prettier.io/docs/en/): Automatic code formater for javascript. Corrects formatting related issues that linters detect.
+* [electron](https://electronjs.org/): Powerful framework for creating desktop applications using the traditional web stack (HTML + CSS + JS + extras). Many great applications are built on top of electron.
 * Data Visualization
   - [D3](https://d3js.org/): Very powerful interactive data visualization library.
 * Drawing and Animation
