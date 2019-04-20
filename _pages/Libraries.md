@@ -19,7 +19,7 @@ author_profile: true
 ### Python
 * [The python standard library](https://docs.python.org/3/library/index.html)
 * [Flake8](http://flake8.pycqa.org/en/latest/): Python linter.
-* [Iodide](https://alpha.iodide.io/): Data science for the web. Write python, javascript, markdown, and CSS to run in a web browser.
+* [Iodide](https://alpha.iodide.io/): Data science for the web. Write python, javascript, markdown, and CSS to all run in a web browser.
 * Computational and Data Science
   - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
   - [Numpy](https://www.numpy.org/) This one is vital; A n-dimensional array (tensor) manipulation library. Super fast since the backend is primarily written in C. Reminiscent of MATLAB.
