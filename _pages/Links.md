@@ -15,7 +15,7 @@ author_profile: true
 ---
 
 
-## This is a currated list of useful links
+## This is a curated list of useful links
 
 
 ### Journals
