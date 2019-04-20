@@ -18,8 +18,8 @@ author_profile: true
 
 ### Python
 * [The python standard library](https://docs.python.org/3/library/index.html)
-* [Jupyter](https://jupyter.org/): Incredible tool for rapid prototyping and data visualization. Primarily for python, but works with other languages too.
 * [Flake8](http://flake8.pycqa.org/en/latest/): Python linter.
+* [Jupyter](https://jupyter.org/): Incredible tool for rapid prototyping and data visualization. Primarily for python, but works with other languages too.
 * [Iodide](https://alpha.iodide.io/): Data science for the web. Write python, javascript, markdown, and CSS to all run in a web browser.
 * Computational and Data Science
   - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
