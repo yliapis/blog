@@ -41,7 +41,7 @@ author_profile: true
 * [Coursera](https://www.coursera.org/): Many high quality courses here.
 * [MIT Open Courseware](https://ocw.mit.edu/): More high quality courses, all free.
 
-### Development Tools
+### Development Tools & Software
 
 * [Jupyter](https://jupyter.org/): Incredible tool for rapid prototyping and data visualization.
 * [tmux](https://github.com/tmux/tmux/wiki): Great for handling multiple terminal windows, and leaving sessions running on a remote machine.
@@ -51,6 +51,10 @@ author_profile: true
 * [Sublime Text](https://www.sublimetext.com/): Minimal and highly customizable code editor.
 * [Sublime Merge](https://www.sublimemerge.com/): Git for sublime, similar to SourceTree.
 * [Atom](https://atom.io/): Another solid code editor, with built in git integration. Speaking of git, this one is made by GitHub.
+* [ITerm](https://iterm2.com/): Great terminal emulator for mac.
+* [Hyper](https://hyper.is/): Another great terminal emulator; this one is cross-platform (and also very pretty).
+* [Slack](https://slack.com/pricing) Great communication tool for collaboration.
+* [Tad](https://www.tadviewer.com/) A viewer for tabular data. Still under development, currently only supports file viewing.
 
 <br>
 <br>
