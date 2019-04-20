@@ -34,6 +34,7 @@ author_profile: true
   - [TensorFlow](https://www.tensorflow.org/) Scalable neural network library.
   - [xarray](http://xarray.pydata.org/en/stable/index.html) N-D labeled arrays and datasets in Python. Somewhat of a multidimensional analog to Pandas.
 * Visualization
+  - [ggplot](http://ggplot.yhathq.com/): Very clean data visualization library. Based on R's ggplot2.
   - [Matplotlib](https://matplotlib.org/) The primary plotting library used in python. Very similar API to MATLAB plotting.
   - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
   - [Plotly](https://plot.ly/python/) Beautiful interactive visualization generation. Some features are not free.
@@ -46,8 +47,10 @@ author_profile: true
 * [nodejs](https://nodejs.org/en/about/): Powerful javascript runtime.
 * [eslint](https://eslint.org/): Extensively customizable linter for javascript.
 * [Prettier](https://prettier.io/docs/en/): Automatic code formater for javascript. Corrects formatting related issues that linters detect.
+* [electron](https://electronjs.org/): Powerful framework for creating desktop applications using the traditional web stack (HTML + CSS + JS + extras). Many great applications are built on top of electron.
 * Data Visualization
   - [D3](https://d3js.org/): Very powerful interactive data visualization library.
+  - [Plotly.js](https://plot.ly/javascript/): High level interactive data visualization library. Use this over D3 unless you are trying to do something very specific.
 * Drawing and Animation
   - [two.js](https://two.js.org/): Easy to use 2D drawing and animation library
 
