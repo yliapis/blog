@@ -18,6 +18,7 @@ author_profile: true
 
 ### Python
 * [The python standard library](https://docs.python.org/3/library/index.html)
+* [Flake8](http://flake8.pycqa.org/en/latest/): Python linter.
 * Computational and Data Science
   - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
   - [Numpy](https://www.numpy.org/) This one is vital; A n-dimensional array (tensor) manipulation library. Super fast since the backend is primarily written in C. Reminiscent of MATLAB.
@@ -34,12 +35,18 @@ author_profile: true
   - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
   - [Plotly](https://plot.ly/python/) Beautiful interactive visualization generation. Some features are not free.
   - [Seaborn](https://seaborn.pydata.org/) Another good statistical data visualization library.
+* Big Data
+  - [dask](https://dask.org/) Powerful scalable computing library (MIMD); lets you build computational graphs and run code in parallel, along with a lot more.
+  - [h5py](https://www.h5py.org/) HDF5 for python. Allows you to store large amounts of data on disk and manipulate it within python.
 
 ### JavaScript
+* [nodejs](https://nodejs.org/en/about/): Powerful javascript runtime.
+* [eslint](https://eslint.org/): Extensively customizable linter for javascript.
+* [Prettier](https://prettier.io/docs/en/): Automatic code formater for javascript. Corrects formatting related issues that linters detect.
 * Data Visualization
-  - [D3](https://d3js.org/) Very powerful interactive data visualization library.
+  - [D3](https://d3js.org/): Very powerful interactive data visualization library.
 * Drawing and Animation
-  - [two.js](https://two.js.org/) Easy to use 2D drawing and animation library
+  - [two.js](https://two.js.org/): Easy to use 2D drawing and animation library
 
 <br>
 <br>
