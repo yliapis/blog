@@ -34,7 +34,7 @@ author_profile: true
   - [TensorFlow](https://www.tensorflow.org/) Scalable neural network library.
   - [xarray](http://xarray.pydata.org/en/stable/index.html) N-D labeled arrays and datasets in Python. Somewhat of a multidimensional analog to Pandas.
 * Visualization
-  - [ggplot](http://ggplot.yhathq.com/): Very clean data visualization library. Based on `R`'s `ggplot2`.
+  - [ggplot](http://ggplot.yhathq.com/): Very clean data visualization library. Based on R's ggplot2.
   - [Matplotlib](https://matplotlib.org/) The primary plotting library used in python. Very similar API to MATLAB plotting.
   - [NetworkX](https://networkx.github.io/) Graph manipulation and visualization library.
   - [Plotly](https://plot.ly/python/) Beautiful interactive visualization generation. Some features are not free.
