@@ -59,4 +59,4 @@ author_profile: true
 <br>
 <br>
 
-Last updated April 2019
+Last updated: April 2019
