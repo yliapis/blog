@@ -49,7 +49,7 @@ author_profile: true
 * [electron](https://electronjs.org/): Powerful framework for creating desktop applications using the traditional web stack (HTML + CSS + JS + extras). Many great applications are built on top of electron.
 * Data Visualization
   - [D3](https://d3js.org/): Very powerful interactive data visualization library.
-  - [Plotly.js](https://plot.ly/javascript/): High level interactive data visualization library.
+  - [Plotly.js](https://plot.ly/javascript/): High level interactive data visualization library. Use this over D3 unless you are trying to do something very specific.
 * Drawing and Animation
   - [two.js](https://two.js.org/): Easy to use 2D drawing and animation library
 
