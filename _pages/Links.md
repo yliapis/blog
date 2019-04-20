@@ -53,8 +53,8 @@ author_profile: true
 * [Atom](https://atom.io/): Another solid code editor, with built in git integration. Speaking of git, this one is made by GitHub.
 * [ITerm](https://iterm2.com/): Great terminal emulator for mac.
 * [Hyper](https://hyper.is/): Another great terminal emulator; this one is cross-platform (and also very pretty).
-* [Slack](https://slack.com/pricing) Great communication tool for collaboration.
-* [Tad](https://www.tadviewer.com/) A viewer for tabular data. Still under development, currently only supports file viewing.
+* [Slack](https://slack.com/pricing): Great communication tool for collaboration.
+* [Tad](https://www.tadviewer.com/): A viewer for tabular data. Still under development, currently only supports file viewing.
 
 <br>
 <br>
