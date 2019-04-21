@@ -22,7 +22,7 @@ author_profile: true
 * [Jupyter](https://jupyter.org/): Incredible tool for rapid prototyping and data visualization. Primarily for python, but works with other languages too.
 * [Iodide](https://alpha.iodide.io/): Data science for the web. Write python, javascript, markdown, and CSS to all run in a web browser.
 * Computational and Data Science
-  - [Gym](https://gym.openai.com/): Very useful tool for developing reinforcement learning models on a (growing) set of defined tasks, ranging from controlling a robotic arm to playing atari videogames. In a nutshell, the purpose of this library is to have standard benchmarks for developing reinforcement learing models that are simple to set up and use. Most (if not all) of the tasks have a real time visualization showing how the model is interacting with the environment.
+  - [Gym](https://gym.openai.com/): Very useful tool for developing reinforcement learning models on a (growing) set of defined tasks, ranging from controlling a robotic arm to playing atari videogames. In a nutshell, the purpose of this library is to have standard benchmarks for developing reinforcement learing models that are simple to set up and use. Most (if not all) of the tasks have a real time visualization showing how the agent is interacting with the environment.
   - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
   - [Numpy](https://www.numpy.org/) This one is vital; A n-dimensional array (tensor) manipulation library. Super fast since the backend is primarily written in C. Reminiscent of MATLAB.
   - [OpenCV](https://docs.opencv.org/3.0-beta/index.html) Image processing library written in C++. Has a python wrapper.
