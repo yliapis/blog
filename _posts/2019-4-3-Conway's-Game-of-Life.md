@@ -1,6 +1,8 @@
 ---
 category: posts
 
+header:
+  teaser: /assets/media/Conway's-Game-of-Life/Gospers_glider_gun.gif
 ---
 
 <html>
