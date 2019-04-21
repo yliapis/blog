@@ -1,9 +1,8 @@
 ---
 title: The Kalman Filter
 
-#header:
-#  image:
-#  teaser:
+header:
+  teaser: /assets/media/The-Kalman-Filter/HMM.png
 ---
 
 # Introduction
