@@ -1,6 +1,8 @@
 ---
 category: posts
 
+header:
+  teaser: /assets/media/A-Neuron-Model/LIF_model.png
 ---
 
 # Computational Model of a Neuron
