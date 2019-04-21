@@ -23,7 +23,7 @@ author_profile: true
 * [Iodide](https://alpha.iodide.io/): Data science for the web. Write python, javascript, markdown, and CSS to all run in a web browser.
 * Computational and Data Science
   - [Gym](https://gym.openai.com/): Very useful tool for developing reinforcement learning models on a (growing) set of defined tasks, ranging from controlling a robotic arm to playing atari videogames. In a nutshell, the purpose of this library is to have standard benchmarks for developing reinforcement learing models that are simple to set up and use. Most (if not all) of the tasks have a real time visualization showing how the agent is interacting with the environment.
-  - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API.
+  - [Keras](https://keras.io/) Great deep learning library. Is built on top of many well known neural network libraries. Very high level, has a beautiful API. Note that additional libraries exist providing more esoteric functionality to keras, such as [keras-contrib](https://github.com/keras-team/keras-contrib) for additional layers and [keras-rl](https://github.com/keras-rl/keras-rl) for deep reinforcement learning.
   - [Numpy](https://www.numpy.org/) This one is vital; A n-dimensional array (tensor) manipulation library. Super fast since the backend is primarily written in C. Reminiscent of MATLAB.
   - [OpenCV](https://docs.opencv.org/3.0-beta/index.html) Image processing library written in C++. Has a python wrapper.
   - [Pandas](https://pandas.pydata.org/) Data table manipulation library.
