@@ -35,6 +35,8 @@ author_profile: true
 ### Blogs
 
 * [Towards Data Science](https://towardsdatascience.com/): Lots of good posts here (and a lot of amateur posts too; be careful)
+* [OpenAI Blog](https://openai.com/blog/): Great AI blog from OpenAI, has lots of articles on the most recent advancements in AI.
+* [Google AI Blog](https://ai.googleblog.com/): Another solid blog from Google for staying up to date with recent inovations in AI, especially when it comes to applications.
 
 ### Online Learning
 
