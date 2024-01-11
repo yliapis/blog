@@ -28,7 +28,7 @@ GEM
     eventmachine (1.2.7)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
-    ffi (1.10.0)
+    ffi (1.16.3)
     forwardable-extended (2.6.0)
     gemoji (3.0.0)
     html-pipeline (2.11.0)
@@ -112,4 +112,4 @@ DEPENDENCIES
   rake (~> 10.0)
 
 BUNDLED WITH
-   1.13.7
+   1.17.3
